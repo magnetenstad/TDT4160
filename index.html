@@ -301,6 +301,7 @@ stikkord</em>.</p>
 <ul>
 <li><a href="#locality-principle">Locality principle</a></li>
 <li><a href="#mean-access-time">Mean access time</a></li>
+<li><a href="#cache-design">Cache design</a></li>
 </ul>
 </li>
 </ul>
@@ -310,7 +311,7 @@ stikkord</em>.</p>
 <li><a href="#231-memory-hierarchies">2.3.1 Memory hierarchies</a></li>
 </ul>
 </li>
-<li><a href="#24-input-and-output-io">2.4 Input and output (IO)</a>
+<li><a href="#24-input-and-output-io">2.4 Input and output (I/O)</a>
 <ul>
 <li><a href="#241-buses">2.4.1 Buses</a>
 <ul>
@@ -522,7 +523,7 @@ stikkord</em>.</p>
 <p>This sequence of steps is frequently referred to as the fetch-decode-execute cycle. It is central to the operation of all computers.</p>
 <h3 class="mume-header" id="213-risc-vs-cisc">2.1.3 RISC vs CISC</h3>
 
-<p>We love RISC but there is the issue of backward compatibility and the billions of dollars companies have invested in software for the Intel line (CISC) &#x1F975;.</p>
+<p>We believe RISC is best but there is the issue of backward compatibility and the billions of dollars companies have invested in software for the Intel line (CISC).</p>
 <table>
 <thead>
 <tr>
@@ -557,51 +558,79 @@ stikkord</em>.</p>
 <p>These are sometimes called the RISC design principles.</p>
 <h3 class="mume-header" id="215-instruction-level-parallelism-ilp">2.1.5 Instruction-level parallelism (ILP)</h3>
 
-<p>Parallelism is exploited within individual instructions to get more instructions per second out of the machine.</p>
+<p>Computer architects are constantly striving to improve performance of the machines they design. Making the chips run faster by increasing their clock speed is one way, but for every new design, there is a limit to what is possible by brute force at that moment in history. Consequently, most computer architects look to parallelism (doing two or more things at once) as a way to get even more performance for a given clock speed. In instruction-level parallelism, parallelism is exploited within individual instructions to get more instructions per second out of the machine.</p>
 <h4 class="mume-header" id="pipelining">Pipelining</h4>
 
-<p><code>TODO</code></p>
+<p>It has been known for years that the actual fetching of instructions from memory is a major bottleneck in instruction execution speed. In a pipeline, instruction execution is often divided into many (often a dozen or more) parts, each one handled by a dedicated piece of hardware, all of which can run in parallel. Pipelining allows a trade-off between <em>latency</em> (how long it takes to execute an instruction), and <em>processor bandwidth</em> (how many instructions that can be executed per second). The maximum clock frequency of the CPU is decided by the slowest stage of the pipeline.</p>
 <h4 class="mume-header" id="superscalar-architectures">Superscalar architectures</h4>
 
-<p><code>TODO</code></p>
+<p>The definition of &quot;superscalar&quot; has evolved somewhat over time. It is now used to describe processors that issue multiple instructions&#x2014;often four or six&#x2014;in a single clock cycle. Of course, a superscalar CPU must have multiple functional units to hand all these instructions to.</p>
 <h3 class="mume-header" id="216-processor-level-parallelism">2.1.6 Processor-level parallelism</h3>
 
-<p>Multiple CPUs work together on the same problem.</p>
+<p>Instruction-level parallelism helps a little, but pipelining and superscalar operation rarely win more than a factor of five or ten. To get gains of 50, 100, or more, the only way is to design computers with multiple CPUs, so we will now take a look at how some of these are organized.</p>
 <h4 class="mume-header" id="data-parallel-computers">Data parallel computers</h4>
 
-<p><code>TODO</code></p>
+<p>A substantial number of problems in computational domains such as the physical sciences, engineering, and computer graphics involve loops and arrays, or otherwise have a highly regular structure. Often the same calculations are performed repeatedly on many different sets of data. The regularity and structure of these programs makes them especially easy targets for speed-up through parallel execution. Two primary methods have been used to execute these highly regular programs quickly and efficiently: SIMD processors and vector processors.</p>
+<ul>
+<li>
+<p>A <em>Single Instruction-stream Multiple Data-stream</em> or SIMD processor consists of a large number of identical processors that perform the same sequence of instructions on different sets of data.</p>
+</li>
+<li>
+<p>A <em>vector processor</em> appears to the programmer very much like a SIMD processor. Like a SIMD processor, it is very efficient at executing a sequence of operations on pairs of data elements. But unlike a SIMD processor, all of the operations are performed in a single, heavily pipelined functional unit.</p>
+</li>
+</ul>
 <h4 class="mume-header" id="multiprocessors">Multiprocessors</h4>
 
-<p><code>TODO</code></p>
+<p>The processing elements in a data parallel processor are not independent CPUs, since there is only one control unit shared among all of them. Our first parallel system with multiple full-blown CPUs is the multiprocessor, a system with more than one CPU sharing a common memory, like a group of people in a room sharing a common blackboard. Since each CPU can read or write any part of memory, they must coordinate (in software) to avoid getting in each other&#x2019;s way.</p>
 <h4 class="mume-header" id="multicomputers">Multicomputers</h4>
 
-<p><code>TODO</code></p>
+<p>Although multiprocessors with a modest number of processors (&#x2264; 256) are relatively easy to build, large ones are surprisingly difficult to construct. The difficulty is in connecting so many the processors to the memory. To get around these problems, many designers have simply abandoned the idea of having a shared memory and just build systems consisting of large numbers of interconnected computers, each having its own private memory, but no common memory. These systems are called multicomputers. The CPUs in a multicomputer are said to be <em>loosely coupled</em>, to contrast them with the <em>tightly coupled</em> multiprocessor CPUs.</p>
 <h2 class="mume-header" id="22-primary-memory">2.2 Primary memory</h2>
 
-<p><code>TODO: introduction</code></p>
+<p>The memory is that part of the computer where programs and data are stored.</p>
 <h3 class="mume-header" id="225-cache-memory">2.2.5 Cache memory</h3>
 
-<p><code>TODO</code></p>
+<p>Historically, CPUs have always been faster than memories. What this imbalance means in practice is that after the CPU issues a memory request, it will not get the word it needs for many CPU cycles. The slower the memory, the more cycles the CPU will have to wait.</p>
+<p>Actually, the problem is not technology, but economics. Engineers know how to build memories that are as fast as CPUs, but to run them at full speed, they have to be located on the CPU chip (because going over the bus to memory is very slow). What we would prefer is a large amount of fast memory at a low price. Interestingly enough, techniques are known for combining a small amount of fast memory with a large amount of slow memory to get the speed of the fast memory (almost) and the capacity of the large memory at a moderate price. The small, fast memory is called a cache.</p>
+<p>The basic idea behind a cache is simple: the most heavily used memory words are kept in the cache. When the CPU needs a word, it first looks in the cache. Only if the word is not there does it go to main memory. Ifasubstantial fraction of the words are in the cache, the average access time can be greatly reduced.</p>
 <h4 class="mume-header" id="locality-principle">Locality principle</h4>
 
+<p>The locality principle is the observation that the memory references made in any short time interval tend to use only a small fraction of the total memory.</p>
 <ul>
-<li>Temporal locality</li>
-<li>Spatial locality</li>
+<li>
+<p>Temporal Locality: Programs tend to access the same data repeatedly over time. That is, if a program has used a variable recently, it&#x2019;s likely to use that variable again soon.</p>
+</li>
+<li>
+<p>Spatial Locality: Programs tend to access data that is nearby other, previously-accessed data. &quot;Nearby&quot; here refers to the data&#x2019;s memory address. For example, if a program accesses data at addresses N and N+4, it&#x2019;s likely to access N+8 soon.</p>
+</li>
 </ul>
+<p>The general idea is that when a word is referenced, it and some of its neighbors are brought from the large slow memory into the cache, so that the next time it is used, it can be accessed quickly.</p>
 <h4 class="mume-header" id="mean-access-time">Mean access time</h4>
 
 <p>Let <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">c</span></span></span></span> be the cache access time, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">m</span></span></span></span> the main memory access time, and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi></mrow><annotation encoding="application/x-tex">h</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">h</span></span></span></span> the hit ratio. We can calculate the mean access time as follows:<br>
 <span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>t</mi><mrow><mi>m</mi><mi>e</mi><mi>a</mi><mi>n</mi></mrow></msub><mo>=</mo><mi>c</mi><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>&#x2212;</mo><mi>h</mi><mo stretchy="false">)</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">t_{mean} = c + (1 - h)m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76508em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight">an</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">c</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">h</span><span class="mclose">)</span><span class="mord mathnormal">m</span></span></span></span></span></p>
+<h4 class="mume-header" id="cache-design">Cache design</h4>
+
+<ol>
+<li><strong>Cache size</strong>: the bigger the cache, the better it performs, but also the slower it is to access and the more it costs.</li>
+<li><strong>Cache line size</strong>: Example: a 16-KB cache can be divided up into 1024 lines of 16 bytes, 2048 lines of 8 bytes, and other combinations.</li>
+<li><strong>Organization of the cache</strong>: how does the cache keep track of which memory words are currently being held?</li>
+<li><strong>Unified or split cache</strong>: should instructions and data use the same cache?</li>
+<li><strong>Number of caches</strong>: It is common these days to have chips with a primary cache on chip, a secondary cache off chip but in the same package as the CPU chip, and a third cache still further away (L1, L2, L3).</li>
+</ol>
 <h2 class="mume-header" id="23-secondary-memory">2.3 Secondary memory</h2>
 
-<p><code>TODO: introduction</code></p>
+<p>No matter how big the main memory is, it is generally way too small to hold all the data people want to store.</p>
 <h3 class="mume-header" id="231-memory-hierarchies">2.3.1 Memory hierarchies</h3>
 
-<p><code>TODO: draw rectangle</code></p>
-<h2 class="mume-header" id="24-input-and-output-io">2.4 Input and output (IO)</h2>
+<p><img src="https://diveintosystems.org/book/C11-MemHierarchy/_images/MemoryHierarchy.png" alt="A visualization of the memory hierarchy"><br>
+Credit: <a href="https://diveintosystems.org/book/C11-MemHierarchy/mem_hierarchy.html">https://diveintosystems.org/book/C11-MemHierarchy/mem_hierarchy.html</a></p>
+<h2 class="mume-header" id="24-input-and-output-io">2.4 Input and output (I/O)</h2>
 
+<p>As we mentioned at the start of this chapter, a computer system has three major components: the CPU, the memories (primary and secondary), and the I/O (Input/Output).</p>
 <h3 class="mume-header" id="241-buses">2.4.1 Buses</h3>
 
+<p>External devices exchange information with the CPU in the same way we generally exchange information in a computer, through <em>buses</em>.</p>
 <h4 class="mume-header" id="interrupt-handler">Interrupt handler</h4>
 
 <p>A controller that reads or writes data to or from memory without CPU intervention is said to be performing <em>Direct Memory Access</em> (DMA). When the transfer is completed, the controller normally causes an <em>interrupt</em>, forcing the CPU to immediately suspend running its current program and start running a special procedure, called an <em>interrupt handler</em>, to check for errors, take any special action needed, and inform the operating system that the I/O is now finished. When the interrupt handler is finished, the CPU continues with the program that was suspended when the interrupt occurred.</p>
@@ -615,7 +644,7 @@ stikkord</em>.</p>
 <p><code>TODO: take a look</code></p>
 <h2 class="mume-header" id="31-gates-and-boolean-algebra">3.1 Gates and boolean algebra</h2>
 
-<p>Regarded as trivial.</p>
+<p><em>Regarded as trivial</em></p>
 <h2 class="mume-header" id="32-basic-digital-logic-circuits">3.2 Basic digital logic circuits</h2>
 
 <h3 class="mume-header" id="322-combinational-circuits">3.2.2 Combinational circuits</h3>
@@ -641,7 +670,7 @@ stikkord</em>.</p>
 <p>To build an adder for, say, two 16-bit words, one just replicates the full adder 16 times. The carry out of a bit is used as the carry into its left neighbor. The carry into the rightmost bit is wired to 0. This type of adder is called a <em>ripple carry adder</em>, because in the worst case, adding 1 to 111...111 (binary), the addition cannot complete until the carry has rippled all the way from the rightmost bit to the leftmost bit. Adders that do not have this delay, and hence are faster, also exist and are usually preferred.</p>
 <h3 class="mume-header" id="324-clocks">3.2.4 Clocks</h3>
 
-<p>Regarded as trivial.</p>
+<p><em>Regarded as trivial</em></p>
 <h2 class="mume-header" id="33-memory">3.3 Memory</h2>
 
 <h3 class="mume-header" id="332-flip-flops">3.3.2 Flip-flops</h3>
@@ -695,16 +724,16 @@ stikkord</em>.</p>
 
 <h2 class="mume-header" id="42-an-example-isa-ijvm">4.2 An example ISA: IJVM</h2>
 
-<p><code>Low priority.</code></p>
+<p><em>Low priority</em></p>
 <h3 class="mume-header" id="421-stacks">4.2.1 Stacks</h3>
 
-<p><code>Low priority.</code></p>
+<p><em>Low priority</em></p>
 <h3 class="mume-header" id="422-the-ijvm-memory-model">4.2.2 The IJVM memory model</h3>
 
-<p><code>Low priority.</code></p>
+<p><em>Low priority</em></p>
 <h3 class="mume-header" id="423-the-ijvm-instruciton-set">4.2.3 The IJVM instruciton set</h3>
 
-<p><code>Low priority.</code></p>
+<p><em>Low priority</em></p>
 <h2 class="mume-header" id="43-an-example-implementation">4.3 An example implementation</h2>
 
 <h3 class="mume-header" id="431-microinstructions-and-notation">4.3.1 Microinstructions and notation</h3>
@@ -765,8 +794,10 @@ stikkord</em>.</p>
 
 <h2 class="mume-header" id="71-introduction-to-the-assembly-language">7.1 Introduction to the Assembly language</h2>
 
+<p><em>Regarded as trivial.</em></p>
 <h2 class="mume-header" id="73-the-assembly-process">7.3 The Assembly process</h2>
 
+<p><em>Regarded as trivial.</em></p>
 <h1 class="mume-header" id="virtual-memory">Virtual memory</h1>
 
 <h2 class="mume-header" id="61-virtual-memory">6.1 Virtual memory</h2>

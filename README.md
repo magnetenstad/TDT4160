@@ -32,9 +32,10 @@ This document is hosted at [magne.dev](https://magne.dev/TDT4160)
     - [2.2.5 Cache memory](#225-cache-memory)
       - [Locality principle](#locality-principle)
       - [Mean access time](#mean-access-time)
+      - [Cache design](#cache-design)
   - [2.3 Secondary memory](#23-secondary-memory)
     - [2.3.1 Memory hierarchies](#231-memory-hierarchies)
-  - [2.4 Input and output (IO)](#24-input-and-output-io)
+  - [2.4 Input and output (I/O)](#24-input-and-output-io)
     - [2.4.1 Buses](#241-buses)
       - [Interrupt handler](#interrupt-handler)
       - [Bus arbiter](#bus-arbiter)
@@ -142,7 +143,7 @@ Note that the following sections (after *General principles*) are dedicated to t
 This sequence of steps is frequently referred to as the fetch-decode-execute cycle. It is central to the operation of all computers.
 
 ### 2.1.3 RISC vs CISC
-We love RISC but there is the issue of backward compatibility and the billions of dollars companies have invested in software for the Intel line (CISC) 🥵.
+We believe RISC is best but there is the issue of backward compatibility and the billions of dollars companies have invested in software for the Intel line (CISC).
 
 RISC|CISC
 ---|---
@@ -160,49 +161,72 @@ Few cycles per instruction|Many cycles per instruction
 These are sometimes called the RISC design principles.
 
 ### 2.1.5 Instruction-level parallelism (ILP)
-Parallelism is exploited within individual instructions to get more instructions per second out of the machine.
+Computer architects are constantly striving to improve performance of the machines they design. Making the chips run faster by increasing their clock speed is one way, but for every new design, there is a limit to what is possible by brute force at that moment in history. Consequently, most computer architects look to parallelism (doing two or more things at once) as a way to get even more performance for a given clock speed. In instruction-level parallelism, parallelism is exploited within individual instructions to get more instructions per second out of the machine.
+
 #### Pipelining
-`TODO`
+It has been known for years that the actual fetching of instructions from memory is a major bottleneck in instruction execution speed. In a pipeline, instruction execution is often divided into many (often a dozen or more) parts, each one handled by a dedicated piece of hardware, all of which can run in parallel. Pipelining allows a trade-off between *latency* (how long it takes to execute an instruction), and *processor bandwidth* (how many instructions that can be executed per second). The maximum clock frequency of the CPU is decided by the slowest stage of the pipeline.
 
 #### Superscalar architectures
-`TODO`
+The definition of "superscalar" has evolved somewhat over time. It is now used to describe processors that issue multiple instructions—often four or six—in a single clock cycle. Of course, a superscalar CPU must have multiple functional units to hand all these instructions to. 
 
 ### 2.1.6 Processor-level parallelism
-Multiple CPUs work together on the same problem.
+Instruction-level parallelism helps a little, but pipelining and superscalar operation rarely win more than a factor of five or ten. To get gains of 50, 100, or more, the only way is to design computers with multiple CPUs, so we will now take a look at how some of these are organized.
 
 ####  Data parallel computers
-`TODO`
+A substantial number of problems in computational domains such as the physical sciences, engineering, and computer graphics involve loops and arrays, or otherwise have a highly regular structure. Often the same calculations are performed repeatedly on many different sets of data. The regularity and structure of these programs makes them especially easy targets for speed-up through parallel execution. Two primary methods have been used to execute these highly regular programs quickly and efficiently: SIMD processors and vector processors.
+
+- A *Single Instruction-stream Multiple Data-stream* or SIMD processor consists of a large number of identical processors that perform the same sequence of instructions on different sets of data.
+
+- A *vector processor* appears to the programmer very much like a SIMD processor. Like a SIMD processor, it is very efficient at executing a sequence of operations on pairs of data elements. But unlike a SIMD processor, all of the operations are performed in a single, heavily pipelined functional unit.
 
 #### Multiprocessors
-`TODO`
+The processing elements in a data parallel processor are not independent CPUs, since there is only one control unit shared among all of them. Our first parallel system with multiple full-blown CPUs is the multiprocessor, a system with more than one CPU sharing a common memory, like a group of people in a room sharing a common blackboard. Since each CPU can read or write any part of memory, they must coordinate (in software) to avoid getting in each other’s way.
 
 #### Multicomputers
-`TODO`
+Although multiprocessors with a modest number of processors (≤ 256) are relatively easy to build, large ones are surprisingly difficult to construct. The difficulty is in connecting so many the processors to the memory. To get around these problems, many designers have simply abandoned the idea of having a shared memory and just build systems consisting of large numbers of interconnected computers, each having its own private memory, but no common memory. These systems are called multicomputers. The CPUs in a multicomputer are said to be *loosely coupled*, to contrast them with the *tightly coupled* multiprocessor CPUs.
 
 ## 2.2 Primary memory
-`TODO: introduction`
+The memory is that part of the computer where programs and data are stored.
 
 ### 2.2.5 Cache memory
-`TODO`
+Historically, CPUs have always been faster than memories. What this imbalance means in practice is that after the CPU issues a memory request, it will not get the word it needs for many CPU cycles. The slower the memory, the more cycles the CPU will have to wait.
+
+Actually, the problem is not technology, but economics. Engineers know how to build memories that are as fast as CPUs, but to run them at full speed, they have to be located on the CPU chip (because going over the bus to memory is very slow). What we would prefer is a large amount of fast memory at a low price. Interestingly enough, techniques are known for combining a small amount of fast memory with a large amount of slow memory to get the speed of the fast memory (almost) and the capacity of the large memory at a moderate price. The small, fast memory is called a cache.
+
+The basic idea behind a cache is simple: the most heavily used memory words are kept in the cache. When the CPU needs a word, it first looks in the cache. Only if the word is not there does it go to main memory. Ifasubstantial fraction of the words are in the cache, the average access time can be greatly reduced.
 
 #### Locality principle
-- Temporal locality
-- Spatial locality
+The locality principle is the observation that the memory references made in any short time interval tend to use only a small fraction of the total memory.
+
+- Temporal Locality: Programs tend to access the same data repeatedly over time. That is, if a program has used a variable recently, it’s likely to use that variable again soon.
+
+- Spatial Locality: Programs tend to access data that is nearby other, previously-accessed data. "Nearby" here refers to the data’s memory address. For example, if a program accesses data at addresses N and N+4, it’s likely to access N+8 soon.
+
+The general idea is that when a word is referenced, it and some of its neighbors are brought from the large slow memory into the cache, so that the next time it is used, it can be accessed quickly.
 
 #### Mean access time
 Let $c$ be the cache access time, $m$ the main memory access time, and $h$ the hit ratio. We can calculate the mean access time as follows:
 $$t_{mean} = c + (1 - h)m$$
 
+#### Cache design
+1. **Cache size**: the bigger the cache, the better it performs, but also the slower it is to access and the more it costs.
+2. **Cache line size**: Example: a 16-KB cache can be divided up into 1024 lines of 16 bytes, 2048 lines of 8 bytes, and other combinations.
+3. **Organization of the cache**: how does the cache keep track of which memory words are currently being held?
+4. **Unified or split cache**: should instructions and data use the same cache?
+5. **Number of caches**: It is common these days to have chips with a primary cache on chip, a secondary cache off chip but in the same package as the CPU chip, and a third cache still further away (L1, L2, L3).
 
 ## 2.3 Secondary memory
-`TODO: introduction`
+No matter how big the main memory is, it is generally way too small to hold all the data people want to store.
 
 ### 2.3.1 Memory hierarchies
-`TODO: draw rectangle`
+![A visualization of the memory hierarchy](https://diveintosystems.org/book/C11-MemHierarchy/_images/MemoryHierarchy.png)
+Credit: https://diveintosystems.org/book/C11-MemHierarchy/mem_hierarchy.html
 
-## 2.4 Input and output (IO)
+## 2.4 Input and output (I/O)
+As we mentioned at the start of this chapter, a computer system has three major components: the CPU, the memories (primary and secondary), and the I/O (Input/Output).
 
 ### 2.4.1 Buses
+External devices exchange information with the CPU in the same way we generally exchange information in a computer, through *buses*.
 
 #### Interrupt handler
 A controller that reads or writes data to or from memory without CPU intervention is said to be performing *Direct Memory Access* (DMA). When the transfer is completed, the controller normally causes an *interrupt*, forcing the CPU to immediately suspend running its current program and start running a special procedure, called an *interrupt handler*, to check for errors, take any special action needed, and inform the operating system that the I/O is now finished. When the interrupt handler is finished, the CPU continues with the program that was suspended when the interrupt occurred.
@@ -216,7 +240,7 @@ What happens if the CPU and an I/O controller want to use the bus at the same ti
 `TODO: take a look`
 
 ## 3.1 Gates and boolean algebra
-Regarded as trivial.
+*Regarded as trivial*
 
 ## 3.2 Basic digital logic circuits
 
@@ -242,7 +266,7 @@ A full adder takes three 1-bit inputs $A$, $B$ and $C_{in}$, (carry in) and outp
 To build an adder for, say, two 16-bit words, one just replicates the full adder 16 times. The carry out of a bit is used as the carry into its left neighbor. The carry into the rightmost bit is wired to 0. This type of adder is called a *ripple carry adder*, because in the worst case, adding 1 to 111...111 (binary), the addition cannot complete until the carry has rippled all the way from the rightmost bit to the leftmost bit. Adders that do not have this delay, and hence are faster, also exist and are usually preferred.
 
 ### 3.2.4 Clocks
-Regarded as trivial.
+*Regarded as trivial*
 
 ## 3.3 Memory
 
@@ -297,13 +321,13 @@ Regarded as trivial.
 # Microarchitecture level
 
 ## 4.2 An example ISA: IJVM
-`Low priority.`
+*Low priority*
 ### 4.2.1 Stacks
-`Low priority.`
+*Low priority*
 ### 4.2.2 The IJVM memory model
-`Low priority.`
+*Low priority*
 ### 4.2.3 The IJVM instruciton set
-`Low priority.`
+*Low priority*
 
 ## 4.3 An example implementation
 
@@ -364,8 +388,10 @@ Regarded as trivial.
 ### 5.6.2 Procedures
 
 ## 7.1 Introduction to the Assembly language
+*Regarded as trivial.*
 
 ## 7.3 The Assembly process
+*Regarded as trivial.*
 
 # Virtual memory
 
