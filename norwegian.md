@@ -8,8 +8,8 @@ stikkord*.
 Merk: dette vil bare inkludere informasjon som er ansett som "ikke-triviell".
 
 Dette dokumentet ligger ute på [magne.dev](https://magne.dev/TDT4160)
-- [Norwegian version](https://magne.dev/TDT4160)
-- [English version](https://magne.dev/TDT4160/norwegian.html)
+- [Norwegian version](https://magne.dev/TDT4160/norwegian.html)
+- [English version](https://magne.dev/TDT4160)
 
 # Table of contents
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
