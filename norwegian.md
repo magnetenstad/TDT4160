@@ -5,7 +5,9 @@
 Basert på Odd Runes *TDT4160 Haust 2021 Pensum og
 stikkord*.
 
-Merk: dette vil bare inkludere informasjon som er ansett som "ikke-triviell".
+Merk:
+- Denne oversettelsen er generert vha. Google Translate, og er full av feil.
+- Dette vil kun inkludere informasjon som er ansett som "ikke-triviell".
 
 Dette dokumentet ligger ute på [magne.dev](https://magne.dev/TDT4160)
 - [Norwegian version](https://magne.dev/TDT4160/norwegian.html)
@@ -222,6 +224,7 @@ Uansett hvor stort hovedminnet er, er det generelt alt for lite til å holde all
 ### 2.3.1 Minnehierarkier
 ![En visualisering av minnehierarkiet](https://diveintosystems.org/book/C11-MemHierarchy/_images/MemoryHierarchy.png)
 Credit: https://diveintosystems.org/book/C11-MemHierarchy/mem_hierarchy.html
+
 ## 2.4 Inngang og utgang (I/O)
 Som vi nevnte i begynnelsen av dette kapittelet, har et datasystem tre hovedkomponenter: CPU, minnene (primær og sekundær) og I/O (Input/Output).
 
@@ -272,8 +275,7 @@ En minnebrikke trenger vanligvis en adressebuss, databuss og noen få styresigna
 ### 3.3.6 RAM-er og ROM-er
 
 #### SRAM vs DRAM
-RAM-er kommer i to varianter, statisk og dynamisk. Statiske RAM-er
-(SRAM-er) er konstruert internt ved å bruke kretser som ligner på vår grunnleggende D-flip-flop. Disse minnene har den egenskapen at innholdet beholdes så lenge strømmen holdes på: sekunder, minutter, timer, til og med dager. Statiske RAM-er er veldig raske. En typisk tilgangstid er i størrelsesorden et nanosekund eller mindre. Av denne grunn er statiske RAM-er populære som cache-minne. Dynamiske RAM-er (DRAM-er), derimot, bruker ikke flip-flops. I stedet er en dynamisk RAM en rekke celler, hver celle inneholder en transistor og en liten kondensator. Kondensatorene kan lades eller utlades, slik at 0-er og 1-ere kan lagres. Fordi den elektriske ladningen har en tendens til å lekke ut, må hver bit i en dynamisk RAM oppdateres (lastes på nytt) med noen millisekunder for å forhindre at dataene lekker bort. Fordi ekstern logikk må ta seg av oppfriskningen, krever dynamiske RAM-er mer komplekse grensesnitt enn statiske, selv om denne ulempen i mange applikasjoner kompenseres for av deres større kapasitet. Siden dynamiske RAM-er bare trenger én transistor og én kondensator per bit (mot seks transistorer per bit for best statisk RAM), har dynamiske RAM-er en veldig høy tetthet (mange biter per brikke). Av denne grunn er hovedminner nesten alltid bygget ut av dynamiske RAM-er. Denne store kapasiteten har imidlertid en pris: dynamiske RAM-er er trege (titalls nanosekunder). Dermed forsøker kombinasjonen av en statisk RAM-cache og et dynamisk RAM-hovedminne å kombinere de gode egenskapene til hver.
+RAM-er kommer i to varianter, statisk og dynamisk. Statiske RAM-er (SRAM-er) er konstruert internt ved å bruke kretser som ligner på vår grunnleggende D-flip-flop. Disse minnene har den egenskapen at innholdet beholdes så lenge strømmen holdes på: sekunder, minutter, timer, til og med dager. Statiske RAM-er er veldig raske. En typisk tilgangstid er i størrelsesorden et nanosekund eller mindre. Av denne grunn er statiske RAM-er populære som cache-minne. Dynamiske RAM-er (DRAM-er), derimot, bruker ikke flip-flops. I stedet er en dynamisk RAM en rekke celler, hver celle inneholder en transistor og en liten kondensator. Kondensatorene kan lades eller utlades, slik at 0-er og 1-ere kan lagres. Fordi den elektriske ladningen har en tendens til å lekke ut, må hver bit i en dynamisk RAM oppdateres (lastes på nytt) med noen millisekunder for å forhindre at dataene lekker bort. Fordi ekstern logikk må ta seg av oppfriskningen, krever dynamiske RAM-er mer komplekse grensesnitt enn statiske, selv om denne ulempen i mange applikasjoner kompenseres for av deres større kapasitet. Siden dynamiske RAM-er bare trenger én transistor og én kondensator per bit (mot seks transistorer per bit for best statisk RAM), har dynamiske RAM-er en veldig høy tetthet (mange biter per brikke). Av denne grunn er hovedminner nesten alltid bygget ut av dynamiske RAM-er. Denne store kapasiteten har imidlertid en pris: dynamiske RAM-er er trege (titalls nanosekunder). Dermed forsøker kombinasjonen av en statisk RAM-cache og et dynamisk RAM-hovedminne å kombinere de gode egenskapene til hver.
 
 #### Ikke-flyktige minnebrikker (ROM-er)
 RAM er ikke den eneste typen minnebrikker. I mange applikasjoner, som leker, apparater og biler, må programmet og noen av dataene forbli lagret selv når strømmen er slått av. Videre, når det er installert, endres verken programmet eller dataene noen gang. Disse kravene har ført til utviklingen av ROM-er (Read-Only Memories), som ikke kan endres eller slettes, med vilje eller på annen måte. Dataene i en ROM settes inn under fremstillingen, hovedsakelig ved å eksponere et fotosensitivt materiale gjennom en maske som inneholder det ønskede bitmønsteret og deretter etse bort den eksponerte (eller ueksponerte) overflaten. Den eneste måten å endre programmet i en ROM er å erstatte hele brikken.
@@ -293,6 +295,7 @@ Jo flere adresselinjer en buss har, jo mer minne kan CPU adressere direkte. Hvis
 
 #### Multipleks buss
 Derfor er den vanlige tilnærmingen for å forbedre ytelsen å legge til flere datalinjer. Som du kanskje forventer, fører imidlertid ikke denne inkrementelle veksten til et rent design til slutt. For å omgå problemet med veldig brede busser, velger noen ganger designere en multipleksbuss. I denne utformingen, i stedet for at adresse- og datalinjene er separate, er det for eksempel 32 linjer for adresse og data sammen. Ved oppstart av en bussdrift brukes linjene til adressen. Senere brukes de til data. For en skriv til minne betyr dette for eksempel at adresselinjene må settes opp og forplantes til minnet før dataene kan settes på bussen. Multipleksing av linjene reduserer bussbredden (og kostnadene), men resulterer i et tregere system.
+
 ### 3.4.4 Bussklokke
 Busser kan deles inn i to forskjellige kategorier avhengig av klokkeslett. En *synkron buss* har en linje drevet av en krystalloscillator. Signalet på denne linjen består av en firkantbølge med en frekvens vanligvis mellom 5 og 133 MHz. Alle bussaktiviteter tar et integrert antall av disse syklusene, kalt busssykluser. Den andre typen buss, *asynkron buss*, har ikke en masterklokke. Busssykluser kan være av hvilken som helst lengde som kreves og trenger ikke være den samme mellom alle par med enheter.
 
