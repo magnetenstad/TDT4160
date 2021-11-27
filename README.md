@@ -40,8 +40,6 @@ This document is hosted at [magne.dev](https://magne.dev/TDT4160)
       - [Interrupt handler](#interrupt-handler)
       - [Bus arbiter](#bus-arbiter)
 - [Digital logic level](#digital-logic-level)
-  - [Sekvensiell logikk, kompendium på BB](#sekvensiell-logikk-kompendium-på-bb)
-  - [3.1 Gates and boolean algebra](#31-gates-and-boolean-algebra)
   - [3.2 Basic digital logic circuits](#32-basic-digital-logic-circuits)
     - [3.2.2 Combinational circuits](#322-combinational-circuits)
       - [Multiplexers](#multiplexers)
@@ -51,24 +49,24 @@ This document is hosted at [magne.dev](https://magne.dev/TDT4160)
         - [Half adder](#half-adder)
         - [Full adder](#full-adder)
         - [Ripple carry adder](#ripple-carry-adder)
-    - [3.2.4 Clocks](#324-clocks)
   - [3.3 Memory](#33-memory)
     - [3.3.2 Flip-flops](#332-flip-flops)
     - [3.3.3 Registers](#333-registers)
+    - [3.3.5 Memory chips](#335-memory-chips)
     - [3.3.6 RAMs and ROMs](#336-rams-and-roms)
       - [SRAM vs DRAM](#sram-vs-dram)
+      - [Nonvolatile memory chips (ROMs)](#nonvolatile-memory-chips-roms)
   - [3.4 CPU chips and buses](#34-cpu-chips-and-buses)
     - [3.4.2 Computer buses](#342-computer-buses)
       - [Bus protocol](#bus-protocol)
     - [3.4.3 Bus width](#343-bus-width)
       - [Multiplexed bus](#multiplexed-bus)
     - [3.4.4 Bus clocking](#344-bus-clocking)
-      - [Synchronous buses](#synchronous-buses)
-      - [Asynchronous buses](#asynchronous-buses)
     - [3.4.5 Bus arbitration](#345-bus-arbitration)
     - [3.4.6 Bus operations](#346-bus-operations)
-  - [3.7 Interfacing](#37-interfacing)
-    - [3.7.2 Address decoding](#372-address-decoding)
+      - [Block transfer](#block-transfer)
+      - [Read-modify-write bus cycle](#read-modify-write-bus-cycle)
+      - [Interrupts](#interrupts)
 - [Microarchitecture level](#microarchitecture-level)
   - [4.2 An example ISA: IJVM](#42-an-example-isa-ijvm)
     - [4.2.1 Stacks](#421-stacks)
@@ -236,12 +234,6 @@ What happens if the CPU and an I/O controller want to use the bus at the same ti
 
 # Digital logic level
 
-## Sekvensiell logikk, kompendium på BB
-`TODO: take a look`
-
-## 3.1 Gates and boolean algebra
-*Regarded as trivial*
-
 ## 3.2 Basic digital logic circuits
 
 ### 3.2.2 Combinational circuits
@@ -265,58 +257,58 @@ A full adder takes three 1-bit inputs $A$, $B$ and $C_{in}$, (carry in) and outp
 ##### Ripple carry adder
 To build an adder for, say, two 16-bit words, one just replicates the full adder 16 times. The carry out of a bit is used as the carry into its left neighbor. The carry into the rightmost bit is wired to 0. This type of adder is called a *ripple carry adder*, because in the worst case, adding 1 to 111...111 (binary), the addition cannot complete until the carry has rippled all the way from the rightmost bit to the leftmost bit. Adders that do not have this delay, and hence are faster, also exist and are usually preferred.
 
-### 3.2.4 Clocks
-*Regarded as trivial*
-
 ## 3.3 Memory
 
 ### 3.3.2 Flip-flops
-`TODO`
+In many circuits it is necessary to sample the value on a certain line at a particular instant in time and store it. In this variant, called a flip-flop, the state transition occurs not when the clock is 1 but during the clock transition from 0 to 1 (rising edge) or from 1 to 0 (falling edge) instead. Thus, the length of the clock pulse is unimportant, as long as the transitions occur fast.
 
 ### 3.3.3 Registers
-`TODO`
+Flip-flops can be combined in groups to create registers, which hold data types larger than 1 bit in length.
+
+### 3.3.5 Memory chips
+A memory chip usually needs an address bus, data bus and a few control signals. CS (chip select) is used to select (enable) the chip.
 
 ### 3.3.6 RAMs and ROMs
-`TODO`
 
 #### SRAM vs DRAM
-`TODO`
+RAMs come in two varieties, static and dynamic. Static RAMs
+(SRAMs) are constructed internally using circuits similar to our basic D flip-flop. These memories have the property that their contents are retained as long as the power is kept on: seconds, minutes, hours, even days. Static RAMs are very fast. A typical access time is on the order of a nanosecond or less. For this reason, static RAMS are popular as cache memory. Dynamic RAMs (DRAMs), in contrast, do not use flip-flops. Instead, a dynamic RAM is an array of cells, each cell containing one transistor and a tiny capacitor. The capacitors can be charged or discharged, allowing 0s and 1s to be stored. Because the electric charge tends to leak out, each bit in a dynamic RAM must be refreshed (reloaded) every few milliseconds to prevent the data from leaking away. Because external logic must take care of the refreshing, dynamic RAMs require more complex interfacing than static ones, although in many applications this disadvantage is compensated for by their larger capacities. Since dynamic RAMs need only one transistor and one capacitor per bit (vs. six transistors per bit for the best static RAM), dynamic RAMs have a very high density (many bits per chip). For this reason, main memories are nearly always built out of dynamic RAMs. However, this large capacity has a price: dynamic RAMs are slow (tens of nanoseconds). Thus, the combination of a static RAM cache and a dynamic RAM main memory attempts to combine the good properties of each.
+
+#### Nonvolatile memory chips (ROMs)
+RAMs are not the only kind of memory chips. In many applications, such as toys, appliances, and cars, the program and some of the data must remain stored even when the power is turned off. Furthermore, once installed, neither the program nor the data are ever changed. These requirements have led to the development of ROMs (Read-Only Memories), which cannot be changed or erased, intentionally or otherwise. The data in a ROM are inserted during its manufacture, essentially by exposing a photosensitive material through a mask containing the desired bit pattern and then etching away the exposed (or unexposed) surface. The only way to change the program in a ROM is to replace the entire chip.
 
 ## 3.4 CPU chips and buses
 
 ### 3.4.2 Computer buses
-`TODO`
+A bus is a common electrical pathway between multiple devices. Buses can be categorized by their function. They can be used internal to the CPU to transport data to and from the ALU, or external to the CPU to connect it to memory or to I/O devices. Each type of bus has its own requirements and properties.
 
 #### Bus protocol
-`TODO`
+In order to make it possible for boards designed by third parties to attach to the system bus, there must be well-defined rules about how the external bus works, which all devices attached to it must obey. These rules are called the *bus protocol*.
+
+Some devices that attach to a bus are active and can initiate bus transfers, whereas others are passive and wait for requests. The active ones are called *masters*; the passive ones are called *slaves*. When the CPU orders a disk controller to read or write a block, the CPU is acting as a master and the disk controller is acting as a slave.
 
 ### 3.4.3 Bus width
-`TODO`
+The more address lines a bus has, the more memory the CPU can address directly. If a bus has $n$ address lines, then a CPU can use it to address $2^n$ different memory locations.
 
 #### Multiplexed bus
-`TODO`
+Therefore the usual approach to improving performance is to add more data lines. As you might expect, however, this incremental growth does not lead to a clean design in the end. To get around the problem of very wide buses, sometimes designers opt for a multiplexed bus. In this design, instead of the address and data lines being separate, there are, say, 32 lines for address and data together. At the start of a bus operation, the lines are used for the address. Later on, they are used for data. For a write to memory, for example, this means that the address lines must be set up and propagated to the memory before the data can be put on the bus. Multiplexing the lines reduces bus width (and cost) but results in a slower system. 
 
 ### 3.4.4 Bus clocking
-`TODO`
-
-#### Synchronous buses
-`TODO`
-
-#### Asynchronous buses
-`TODO`
+Buses can be divided into two distinct categories depending on their clocking. A *synchronous bus* has a line driven by a crystal oscillator. The signal on this line consists of a square wave with a frequency generally between 5 and 133 MHz. All bus activities take an integral number of these cycles, called bus cycles. The other kind of bus, the *asynchronous bus*, does not have a master clock. Bus cycles can be of any length required and need not be the same between all pairs of devices.
 
 ### 3.4.5 Bus arbitration
-`TODO`
+"What happens if two or more devices all want to become bus master at the same time?" The answer is that some bus arbitration mechanism is needed to prevent chaos. Arbitration mechanisms can be centralized or decentralized. In centralized arbitration, a single bus arbiter determines who goes next. Decentralized arbitration can be implemented in several ways, but it usually involves that the devices must check if the bus is free to use before using it.
 
 ### 3.4.6 Bus operations
-`TODO`
 
-## 3.7 Interfacing
-`TODO`
+#### Block transfer
+Often block transfers can be made more efficient than successive individual transfers. When a block read is started, the bus master tells the slave how many words are to be transferred, for example, by putting the word count on the data lines. Instead of just returning one word, the slave outputs one word during each cycle until the count has been exhausted. 
 
-### 3.7.2 Address decoding
-`TODO`
+#### Read-modify-write bus cycle
+Allows any CPU to read a word from memory, inspect and modify it, and write it back to memory, all without releasing the bus. This type of cycle prevents competing CPUs from being able to use the bus and thus interfere with the first CPU’s operation.
 
+#### Interrupts
+When the CPU commands an I/O device to do something, it usually expects an interrupt when the work is done. The interrupt signaling requires the bus. Since multiple devices may want to cause an interrupt simultaneously, the same kind of arbitration problems are present here that we had with ordinary bus cycles. The usual solution is to assign priorities to devices and use a centralized arbiter to give priority to the most time-critical devices.
 
 # Microarchitecture level
 
