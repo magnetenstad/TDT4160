@@ -1,0 +1,822 @@
+<!DOCTYPE html><html><head>
+      <title>norwegian</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header" id="notater-fra-structured-computer-organization-sixth-edition">Notater fra STRUCTURED COMPUTER ORGANIZATION SIXTH EDITION</h1>
+
+<p>Basert p&#xE5; Odd Runes <em>TDT4160 Haust 2021 Pensum og<br>
+stikkord</em>.</p>
+<p>Merk: dette vil bare inkludere informasjon som er ansett som &quot;ikke-triviell&quot;.</p>
+<p>Dette dokumentet ligger ute p&#xE5; <a href="https://magne.dev/TDT4160">magne.dev</a></p>
+<ul>
+<li><a href="https://magne.dev/TDT4160">Norwegian version</a></li>
+<li><a href="https://magne.dev/TDT4160/norwegian">English version</a></li>
+</ul>
+<h1 class="mume-header" id="table-of-contents">Table of contents</h1>
+
+<div class="code-chunk" data-id="code-chunk-id-0" data-cmd="toc"><div class="input-div"><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><ul>
+<li><a href="#notater-fra-structured-computer-organization-sixth-edition">Notater fra STRUCTURED COMPUTER ORGANIZATION SIXTH EDITION</a></li>
+<li><a href="#table-of-contents">Table of contents</a></li>
+<li><a href="#generelle-prinsipper">Generelle prinsipper</a>
+<ul>
+<li><a href="#11-strukturert-dataorganisasjon">1.1 Strukturert dataorganisasjon</a></li>
+<li><a href="#21-prosessorer">2.1 Prosessorer</a>
+<ul>
+<li><a href="#212-utf%C3%B8relse-av-instruksjoner">2.1.2 Utf&#xF8;relse av instruksjoner</a></li>
+<li><a href="#213-risc-vs-cisc">2.1.3 RISC vs CISC</a></li>
+<li><a href="#214-designprinsipper-for-moderne-datamaskiner">2.1.4 Designprinsipper for moderne datamaskiner</a></li>
+<li><a href="#215-parallellisme-p%C3%A5-instruksjonsniv%C3%A5-ilp">2.1.5 Parallellisme p&#xE5; instruksjonsniv&#xE5; (ILP)</a>
+<ul>
+<li><a href="#r%C3%B8rf%C3%B8ring">R&#xF8;rf&#xF8;ring</a></li>
+<li><a href="#superskalararkitekturer">Superskalararkitekturer</a></li>
+</ul>
+</li>
+<li><a href="#216-parallellitet-p%C3%A5-prosessorniv%C3%A5">2.1.6 Parallellitet p&#xE5; prosessorniv&#xE5;</a>
+<ul>
+<li><a href="#dataparallelle-datamaskiner">Dataparallelle datamaskiner</a></li>
+<li><a href="#multiprosessorer">Multiprosessorer</a></li>
+<li><a href="#multidatamaskiner">Multidatamaskiner</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#22-prim%C3%A6rminne">2.2 Prim&#xE6;rminne</a>
+<ul>
+<li><a href="#225-bufferminne">2.2.5 Bufferminne</a>
+<ul>
+<li><a href="#lokalitetsprinsipp">Lokalitetsprinsipp</a></li>
+<li><a href="#gjennomsnittlig-tilgangstid">Gjennomsnittlig tilgangstid</a></li>
+<li><a href="#cache-design">Cache-design</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#23-sekund%C3%A6rt-minne">2.3 Sekund&#xE6;rt minne</a>
+<ul>
+<li><a href="#231-minnehierarkier">2.3.1 Minnehierarkier</a></li>
+</ul>
+</li>
+<li><a href="#24-inngang-og-utgang-io">2.4 Inngang og utgang (I/O)</a>
+<ul>
+<li><a href="#241-busser">2.4.1 Busser</a>
+<ul>
+<li><a href="#avbruddsbehandler">Avbruddsbehandler</a></li>
+<li><a href="#bussdommer">Bussdommer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#digitalt-logikkniv%C3%A5">Digitalt logikkniv&#xE5;</a>
+<ul>
+<li><a href="#32-grunnleggende-digitale-logiske-kretser">3.2 Grunnleggende digitale logiske kretser</a>
+<ul>
+<li><a href="#322-kombinasjonskretser">3.2.2 Kombinasjonskretser</a>
+<ul>
+<li><a href="#multipleksere">Multipleksere</a></li>
+<li><a href="#dekodere">Dekodere</a></li>
+</ul>
+</li>
+<li><a href="#323-aritmetiske-kretser">3.2.3 Aritmetiske kretser</a>
+<ul>
+<li><a href="#addere">Addere</a>
+<ul>
+<li><a href="#halvhugger">Halvhugger</a></li>
+<li><a href="#full-adder">Full adder</a></li>
+<li><a href="#ripple-b%C3%A6re-huggorm">Ripple b&#xE6;re huggorm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#33-minne">3.3 Minne</a>
+<ul>
+<li><a href="#332-flip-flops">3.3.2 Flip-flops</a></li>
+<li><a href="#333-registrerer">3.3.3 Registrerer</a></li>
+<li><a href="#335-minnebrikker">3.3.5 Minnebrikker</a></li>
+<li><a href="#336-ram-er-og-rom-er">3.3.6 RAM-er og ROM-er</a>
+<ul>
+<li><a href="#sram-vs-dram">SRAM vs DRAM</a></li>
+<li><a href="#ikke-flyktige-minnebrikker-rom-er">Ikke-flyktige minnebrikker (ROM-er)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#34-cpu-brikker-og-busser">3.4 CPU-brikker og busser</a>
+<ul>
+<li><a href="#342-databusser">3.4.2 Databusser</a>
+<ul>
+<li><a href="#bussprotokoll">Bussprotokoll</a></li>
+</ul>
+</li>
+<li><a href="#343-bussbredde">3.4.3 Bussbredde</a>
+<ul>
+<li><a href="#multipleks-buss">Multipleks buss</a></li>
+</ul>
+</li>
+<li><a href="#344-bussklokke">3.4.4 Bussklokke</a></li>
+<li><a href="#345-buss-voldgift">3.4.5 Buss voldgift</a></li>
+<li><a href="#346-bussdrift">3.4.6 Bussdrift</a>
+<ul>
+<li><a href="#blokker-overf%C3%B8ring">Blokker overf&#xF8;ring</a></li>
+<li><a href="#lese-endre-skrive-busssyklus">Lese-endre-skrive busssyklus</a></li>
+<li><a href="#avbryter">Avbryter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#microarchitecture-level">Microarchitecture level</a>
+<ul>
+<li><a href="#42-an-example-isa-ijvm">4.2 An example ISA: IJVM</a>
+<ul>
+<li><a href="#421-stacks">4.2.1 Stacks</a></li>
+<li><a href="#422-the-ijvm-memory-model">4.2.2 The IJVM memory model</a></li>
+<li><a href="#423-the-ijvm-instruciton-set">4.2.3 The IJVM instruciton set</a></li>
+</ul>
+</li>
+<li><a href="#43-an-example-implementation">4.3 An example implementation</a>
+<ul>
+<li><a href="#431-microinstructions-and-notation">4.3.1 Microinstructions and notation</a></li>
+<li><a href="#432-implementation-of-ijvm-using-the-mic-1">4.3.2 Implementation of IJVM using the mic-1</a></li>
+</ul>
+</li>
+<li><a href="#44-design-of-the-microarchitecture-level">4.4 Design of the microarchitecture level</a>
+<ul>
+<li><a href="#441-speed-versus-cost">4.4.1 Speed versus cost</a></li>
+<li><a href="#442-reducing-the-execution-path-length">4.4.2 Reducing the execution path length</a></li>
+<li><a href="#443-a-design-with-prefetching-the-mic-2">4.4.3 A design with prefetching: the mic-2</a></li>
+<li><a href="#444-a-pipelined-design-the-mic-3">4.4.4 A pipelined design: the mic-3</a></li>
+<li><a href="#445-a-seven-stage-pipeline-the-mic-4">4.4.5 A seven-stage pipeline: the mic-4</a></li>
+</ul>
+</li>
+<li><a href="#45-improving-performance">4.5 Improving performance</a>
+<ul>
+<li><a href="#451-cache-memory">4.5.1 Cache memory</a></li>
+<li><a href="#452-branch-prediction">4.5.2 Branch prediction</a></li>
+</ul>
+</li>
+<li><a href="#81-on-chip-parallelism">8.1 On-chip parallelism</a>
+<ul>
+<li><a href="#811-instruction-level-parallelism-ila">8.1.1 Instruction-level parallelism (ILA)</a></li>
+<li><a href="#812-on-chip-multithreading">8.1.2 On-chip multithreading</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#instruction-set-architecture-level-isa">Instruction set architecture level (ISA)</a>
+<ul>
+<li><a href="#51-overview-of-the-isa-level">5.1 Overview of the ISA level</a>
+<ul>
+<li><a href="#511-properties-of-the-isa-level">5.1.1 Properties of the ISA level</a></li>
+<li><a href="#512-memory-models">5.1.2 Memory models</a></li>
+<li><a href="#513-registers">5.1.3 Registers</a></li>
+</ul>
+</li>
+<li><a href="#53-instruction-formats">5.3 Instruction formats</a>
+<ul>
+<li><a href="#531-design-criteria-for-instruction-formats">5.3.1 Design criteria for instruction formats</a></li>
+<li><a href="#531-expanding-opcodes">5.3.1 Expanding opcodes</a></li>
+</ul>
+</li>
+<li><a href="#54-addressing">5.4 Addressing</a></li>
+<li><a href="#55-instruction-types">5.5 Instruction types</a></li>
+<li><a href="#56-flow-of-control">5.6 Flow of control</a>
+<ul>
+<li><a href="#561-sequential-flow-of-control-and-branches">5.6.1 Sequential flow of control and branches</a></li>
+<li><a href="#562-procedures">5.6.2 Procedures</a></li>
+</ul>
+</li>
+<li><a href="#71-introduction-to-the-assembly-language">7.1 Introduction to the Assembly language</a></li>
+<li><a href="#73-the-assembly-process">7.3 The Assembly process</a></li>
+</ul>
+</li>
+<li><a href="#virtual-memory">Virtual memory</a>
+<ul>
+<li><a href="#61-virtual-memory">6.1 Virtual memory</a>
+<ul>
+<li><a href="#611-paging">6.1.1 Paging</a></li>
+<li><a href="#612-implementation-of-paging">6.1.2 Implementation of paging</a></li>
+<li><a href="#613-demand-paging-and-the-working-set-model">6.1.3 Demand paging and the working-set model</a></li>
+<li><a href="#614-page-replacement-policy">6.1.4 Page-replacement policy</a></li>
+<li><a href="#615-page-size-and-fragmentation">6.1.5 Page size and fragmentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 class="mume-header" id="generelle-prinsipper">Generelle prinsipper</h1>
+
+<h2 class="mume-header" id="11-strukturert-dataorganisasjon">1.1 Strukturert dataorganisasjon</h2>
+
+<table>
+<thead>
+<tr>
+<th>Niv&#xE5;</th>
+<th>Beskrivelse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5</td>
+<td>Problemorientert spr&#xE5;kniv&#xE5;</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Forsamlingsspr&#xE5;kniv&#xE5;</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Operativsystem maskinniv&#xE5; (OS)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Instruksjonssettarkitekturniv&#xE5; (ISA)</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Mikroarkitekturniv&#xE5;</td>
+</tr>
+<tr>
+<td>0</td>
+<td>Digitalt logikkniv&#xE5;</td>
+</tr>
+</tbody>
+</table>
+<p>Merk at de f&#xF8;lgende delene (etter <em>Generelle prinsipper</em>) er dedikert til de tre nederste niv&#xE5;ene, som starter med niv&#xE5; null.</p>
+<h2 class="mume-header" id="21-prosessorer">2.1 Prosessorer</h2>
+
+<h3 class="mume-header" id="212-utf%C3%B8relse-av-instruksjoner">2.1.2 Utf&#xF8;relse av instruksjoner</h3>
+
+<ol>
+<li>Hent neste instruksjon fra minnet til instruksjonsregisteret.</li>
+<li>Endre programtelleren til &#xE5; peke p&#xE5; f&#xF8;lgende instruksjon.</li>
+<li>Bestem hvilken type instruksjon som nettopp er hentet.</li>
+<li>Hvis instruksjonen bruker et ord i minnet, avgj&#xF8;r hvor det er.</li>
+<li>Hent ordet, om n&#xF8;dvendig, inn i et CPU-register.</li>
+<li>Utf&#xF8;r instruksjonen.</li>
+<li>G&#xE5; til trinn 1 for &#xE5; begynne &#xE5; utf&#xF8;re f&#xF8;lgende instruksjon.</li>
+</ol>
+<p>Denne sekvensen av trinn blir ofte referert til som hente-dekode-utf&#xF8;r-syklusen. Det er sentralt for driften av alle datamaskiner.</p>
+<h3 class="mume-header" id="213-risc-vs-cisc">2.1.3 RISC vs CISC</h3>
+
+<p>Vi mener RISC er best, men det er sp&#xF8;rsm&#xE5;let om bakoverkompatibilitet og milliarder av dollar selskaper har investert i programvare for Intel-linjen (CISC).</p>
+<table>
+<thead>
+<tr>
+<th>RISC</th>
+<th>CISC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F&#xE5;, enkle og generelle instruksjoner</td>
+<td>Mange, komplekse og spesialiserte instruksjoner</td>
+</tr>
+<tr>
+<td>Registrer-til-registrer, LOAD/STORE-arkitektur</td>
+<td>Minne-til-minne, last/lager innlemmet i instruksjoner</td>
+</tr>
+<tr>
+<td>F&#xE5; sykluser per instruksjon</td>
+<td>Mange sykluser per instruksjon</td>
+</tr>
+</tbody>
+</table>
+<h3 class="mume-header" id="214-designprinsipper-for-moderne-datamaskiner">2.1.4 Designprinsipper for moderne datamaskiner</h3>
+
+<ul>
+<li>Alle instruksjoner utf&#xF8;res direkte av maskinvare</li>
+<li>Maksimer hastigheten som instruksjoner utstedes med<br>
+&#x2013; Instruksjoner skal v&#xE6;re enkle &#xE5; avkode</li>
+<li>Bare laster og lagrer skal referere til minne</li>
+<li>Gi mange registre</li>
+</ul>
+<p>Disse kalles noen ganger RISC-designprinsippene.</p>
+<h3 class="mume-header" id="215-parallellisme-p%C3%A5-instruksjonsniv%C3%A5-ilp">2.1.5 Parallellisme p&#xE5; instruksjonsniv&#xE5; (ILP)</h3>
+
+<p>Dataarkitekter streber hele tiden etter &#xE5; forbedre ytelsen til maskinene de designer. &#xC5; f&#xE5; brikkene til &#xE5; l&#xF8;pe raskere ved &#xE5; &#xF8;ke klokkehastigheten er &#xE9;n m&#xE5;te, men for hvert nytt design er det en grense for hva som er mulig med brute force i det &#xF8;yeblikket i historien. F&#xF8;lgelig ser de fleste dataarkitekter p&#xE5; parallellisme (&#xE5; gj&#xF8;re to eller flere ting samtidig) som en m&#xE5;te &#xE5; f&#xE5; enda mer ytelse for en gitt klokkehastighet. Ved parallellisme p&#xE5; instruksjonsniv&#xE5; utnyttes parallellisme innenfor individuelle instruksjoner for &#xE5; f&#xE5; flere instruksjoner per sekund ut av maskinen.</p>
+<h4 class="mume-header" id="r%C3%B8rf%C3%B8ring">R&#xF8;rf&#xF8;ring</h4>
+
+<p>Det har v&#xE6;rt kjent i &#xE5;revis at selve henting av instruksjoner fra minnet er en stor flaskehals i instruksjonsutf&#xF8;relseshastigheten. I en pipeline er instruksjonsutf&#xF8;relse ofte delt inn i mange (ofte et dusin eller flere) deler, hver enkelt h&#xE5;ndteres av en dedikert maskinvare, som alle kan kj&#xF8;re parallelt. Pipelining tillater en avveining mellom <em>latens</em> (hvor lang tid det tar &#xE5; utf&#xF8;re en instruksjon), og <em>prosessorb&#xE5;ndbredde</em> (hvor mange instruksjoner som kan utf&#xF8;res per sekund). Den maksimale klokkefrekvensen til CPUen bestemmes av det tregeste stadiet i r&#xF8;rledningen.</p>
+<h4 class="mume-header" id="superskalararkitekturer">Superskalararkitekturer</h4>
+
+<p>Definisjonen av &quot;superskalar&quot; har utviklet seg noe over tid. Det brukes n&#xE5; til &#xE5; beskrive prosessorer som gir flere instruksjoner - ofte fire eller seks - i en enkelt klokkesyklus. Selvf&#xF8;lgelig m&#xE5; en superskalar CPU ha flere funksjonelle enheter &#xE5; gi alle disse instruksjonene til.</p>
+<h3 class="mume-header" id="216-parallellitet-p%C3%A5-prosessorniv%C3%A5">2.1.6 Parallellitet p&#xE5; prosessorniv&#xE5;</h3>
+
+<p>Parallellitet p&#xE5; instruksjonsniv&#xE5; hjelper litt, men pipelining og superskalardrift vinner sjelden mer enn en faktor p&#xE5; fem eller ti. For &#xE5; f&#xE5; gevinster p&#xE5; 50, 100 eller mer, er den eneste m&#xE5;ten &#xE5; designe datamaskiner med flere CPUer, s&#xE5; vi skal n&#xE5; se p&#xE5; hvordan noen av disse er organisert.</p>
+<h4 class="mume-header" id="dataparallelle-datamaskiner">Dataparallelle datamaskiner</h4>
+
+<p>Et betydelig antall problemer innen beregningsdomener som fysiske vitenskaper, ingeni&#xF8;rvitenskap og datagrafikk involverer l&#xF8;kker og matriser, eller har p&#xE5; annen m&#xE5;te en sv&#xE6;rt regelmessig struktur. Ofte utf&#xF8;res de samme beregningene gjentatte ganger p&#xE5; mange forskjellige sett med data. Regelmessigheten og strukturen til disse programmene gj&#xF8;r dem spesielt enkle m&#xE5;l for &#xE5; &#xF8;ke hastigheten gjennom parallell utf&#xF8;relse. To prim&#xE6;re metoder har blitt brukt for &#xE5; utf&#xF8;re disse sv&#xE6;rt vanlige programmene raskt og effektivt: SIMD-prosessorer og vektorprosessorer.</p>
+<ul>
+<li>
+<p>En <em>Single Instruction-stream Multiple Data-stream</em> eller SIMD-prosessor best&#xE5;r av et stort antall identiske prosessorer som utf&#xF8;rer samme sekvens av instruksjoner p&#xE5; forskjellige sett med data.</p>
+</li>
+<li>
+<p>En <em>vektorprosessor</em> ser for programmereren veldig ut som en SIMD-prosessor. Som en SIMD-prosessor er den veldig effektiv til &#xE5; utf&#xF8;re en sekvens av operasjoner p&#xE5; par av dataelementer. Men i motsetning til en SIMD-prosessor, utf&#xF8;res alle operasjonene i en enkelt funksjonell enhet med kraftig pipeline.</p>
+</li>
+<li></li>
+</ul>
+<h4 class="mume-header" id="multiprosessorer">Multiprosessorer</h4>
+
+<p>Behandlingselementene i en dataparallell prosessor er ikke uavhengige CPUer, siden det bare er &#xE9;n kontrollenhet som deles mellom dem alle. V&#xE5;rt f&#xF8;rste parallelle system med flere fullverdige CPUer er multiprosessoren, et system med mer enn &#xE9;n CPU som deler et felles minne, som en gruppe mennesker i et rom som deler en felles tavle. Siden hver CPU kan lese eller skrive hvilken som helst del av minnet, m&#xE5; de koordinere (i programvare) for &#xE5; unng&#xE5; &#xE5; komme i veien for hverandre.</p>
+<h4 class="mume-header" id="multidatamaskiner">Multidatamaskiner</h4>
+
+<p>Selv om multiprosessorer med et beskjedent antall prosessorer (&#x2264; 256) er relativt enkle &#xE5; bygge, er store overraskende vanskelige &#xE5; konstruere. Vanskeligheten er &#xE5; koble s&#xE5; mange prosessorer til minnet. For &#xE5; omg&#xE5; disse problemene har mange designere ganske enkelt forlatt ideen om &#xE5; ha et delt minne og bare bygge systemer som best&#xE5;r av et stort antall sammenkoblede datamaskiner, som hver har sitt eget private minne, men ikke noe felles minne. Disse systemene kalles multidatamaskiner. CPU-ene i en multidatamaskin sies &#xE5; v&#xE6;re <em>l&#xF8;st koblet</em>, for &#xE5; kontrastere dem med de <em>tett koblede</em> multiprosessor-CPUene.</p>
+<h2 class="mume-header" id="22-prim%C3%A6rminne">2.2 Prim&#xE6;rminne</h2>
+
+<p>Minnet er den delen av datamaskinen der programmer og data er lagret.</p>
+<h3 class="mume-header" id="225-bufferminne">2.2.5 Bufferminne</h3>
+
+<p>Historisk sett har CPUer alltid v&#xE6;rt raskere enn minner. Hva denne ubalansen betyr i praksis er at etter at CPUen har sendt ut en minneforesp&#xF8;rsel, vil den ikke f&#xE5; ordet den trenger i mange CPU-sykluser. Jo tregere minnet er, jo flere sykluser m&#xE5; CPU-en vente.</p>
+<p>Problemet er faktisk ikke teknologi, men &#xF8;konomi. Ingeni&#xF8;rer vet hvordan de skal bygge minner som er like raske som CPUer, men for &#xE5; kj&#xF8;re dem i full hastighet, m&#xE5; de v&#xE6;re plassert p&#xE5; CPU-brikken (fordi det g&#xE5;r veldig tregt &#xE5; g&#xE5; over bussen til minnet). Det vi foretrekker er en stor mengde raskt minne til en lav pris. Interessant nok er teknikker kjent for &#xE5; kombinere en liten mengde raskt minne med en stor mengde sakte minne for &#xE5; f&#xE5; hastigheten til det raske minnet (nesten) og kapasiteten til det store minnet til en moderat pris. Det lille, raske minnet kalles en cache.</p>
+<p>Den grunnleggende ideen bak en cache er enkel: de mest brukte minneordene holdes i cachen. N&#xE5;r CPU-en trenger et ord, ser den f&#xF8;rst i hurtigbufferen. Bare hvis ordet ikke er der, g&#xE5;r det til hovedminnet. Hvis en betydelig del av ordene er i hurtigbufferen, kan den gjennomsnittlige tilgangstiden reduseres kraftig.</p>
+<h4 class="mume-header" id="lokalitetsprinsipp">Lokalitetsprinsipp</h4>
+
+<p>Lokalitetsprinsippet er observasjonen at minnereferansene gjort i et hvilket som helst kort tidsintervall har en tendens til &#xE5; bruke bare en liten br&#xF8;kdel av det totale minnet.</p>
+<ul>
+<li>
+<p>Temporal Locality: Programmer har en tendens til &#xE5; f&#xE5; tilgang til de samme dataene gjentatte ganger over tid. Det vil si, hvis et program har brukt en variabel nylig, vil det sannsynligvis bruke den variabelen igjen snart.</p>
+</li>
+<li>
+<p>Romlig lokalitet: Programmer har en tendens til &#xE5; f&#xE5; tilgang til data som er i n&#xE6;rheten av andre tidligere tilgang til data. &quot;N&#xE6;rliggende&quot; refererer her til dataens minneadresse. For eksempel, hvis et program f&#xE5;r tilgang til data p&#xE5; adressene N og N+4, vil det sannsynligvis f&#xE5; tilgang til N+8 snart.</p>
+</li>
+</ul>
+<p>Den generelle ideen er at n&#xE5;r et ord refereres, blir det og noen av dets naboer hentet fra det store sakte minnet inn i hurtigbufferen, slik at neste gang det brukes, kan det n&#xE5;s raskt.</p>
+<h4 class="mume-header" id="gjennomsnittlig-tilgangstid">Gjennomsnittlig tilgangstid</h4>
+
+<p>La <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">c</span></span></span></span> v&#xE6;re cachetilgangstiden, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">m</span></span></span></span> hovedminnets tilgangstid og <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi></mrow><annotation encoding="application/x-tex">h</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">h</span></span></span></span> treffforholdet. Vi kan beregne gjennomsnittlig tilgangstid som f&#xF8;lger:<br>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>t</mi><mrow><mi>m</mi><mi>e</mi><mi>a</mi><mi>n</mi></mrow></msub><mo>=</mo><mi>c</mi><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>&#x2212;</mo><mi>t</mi><mo stretchy="false">)</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">t_{mean} = c + (1 - t)m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76508em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight">an</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">c</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mord mathnormal">m</span></span></span></span></span></p>
+<h4 class="mume-header" id="cache-design">Cache-design</h4>
+
+<ol>
+<li><strong>Cachest&#xF8;rrelse</strong>: jo st&#xF8;rre cache, desto bedre presterer den, men jo tregere er den &#xE5; f&#xE5; tilgang til og jo mer koster den.</li>
+<li><strong>Cachelinjest&#xF8;rrelse</strong>: Eksempel: en 16-KB cache kan deles opp i 1024 linjer p&#xE5; 16 byte, 2048 linjer p&#xE5; 8 byte og andre kombinasjoner.</li>
+<li><strong>Organisering av cachen</strong>: hvordan holder cachen styr p&#xE5; hvilke minneord som for &#xF8;yeblikket lagres?</li>
+<li><strong>Enhet eller delt hurtigbuffer</strong>: b&#xF8;r instruksjoner og data bruke samme hurtigbuffer?</li>
+<li><strong>Antall cacher</strong>: Det er vanlig i disse dager &#xE5; ha brikker med en prim&#xE6;r cache p&#xE5; brikke, en sekund&#xE6;r cache av brikke, men i samme pakke som CPU-brikken, og en tredje cache enda lenger unna (L1, L2, L3).</li>
+</ol>
+<h2 class="mume-header" id="23-sekund%C3%A6rt-minne">2.3 Sekund&#xE6;rt minne</h2>
+
+<p>Uansett hvor stort hovedminnet er, er det generelt alt for lite til &#xE5; holde alle dataene folk &#xF8;nsker &#xE5; lagre.</p>
+<h3 class="mume-header" id="231-minnehierarkier">2.3.1 Minnehierarkier</h3>
+
+<p><img src="https://diveintosystems.org/book/C11-MemHierarchy/_images/MemoryHierarchy.png" alt="En visualisering av minnehierarkiet"><br>
+Credit: <a href="https://diveintosystems.org/book/C11-MemHierarchy/mem_hierarchy.html">https://diveintosystems.org/book/C11-MemHierarchy/mem_hierarchy.html</a></p>
+<h2 class="mume-header" id="24-inngang-og-utgang-io">2.4 Inngang og utgang (I/O)</h2>
+
+<p>Som vi nevnte i begynnelsen av dette kapittelet, har et datasystem tre hovedkomponenter: CPU, minnene (prim&#xE6;r og sekund&#xE6;r) og I/O (Input/Output).</p>
+<h3 class="mume-header" id="241-busser">2.4.1 Busser</h3>
+
+<p>Eksterne enheter utveksler informasjon med CPU-en p&#xE5; samme m&#xE5;te som vi vanligvis utveksler informasjon i en datamaskin, gjennom <em>busser</em>.</p>
+<h4 class="mume-header" id="avbruddsbehandler">Avbruddsbehandler</h4>
+
+<p>En kontroller som leser eller skriver data til eller fra minnet uten CPU-intervensjon sies &#xE5; utf&#xF8;re <em>Direct Memory Access</em> (DMA). N&#xE5;r overf&#xF8;ringen er fullf&#xF8;rt, for&#xE5;rsaker kontrolleren normalt et <em>avbrudd</em>, som tvinger CPU-en til umiddelbart &#xE5; stanse kj&#xF8;ringen av sitt n&#xE5;v&#xE6;rende program og begynne &#xE5; kj&#xF8;re en spesiell prosedyre, kalt en <em>avbruddsbehandler</em>, for &#xE5; se etter feil, utf&#xF8;re eventuelle spesielle handlinger som trengs, og informer operativsystemet om at I/U-en n&#xE5; er ferdig. N&#xE5;r avbruddsbehandleren er ferdig, fortsetter CPU med programmet som ble suspendert da avbruddet skjedde.</p>
+<h4 class="mume-header" id="bussdommer">Bussdommer</h4>
+
+<p>Hva skjer hvis CPU og en I/O-kontroller vil bruke bussen samtidig? Svaret er at en brikke som kalles en bussdommer bestemmer hvem som g&#xE5;r videre. Generelt gis I/O-enheter foretrukket fremfor CPU, fordi disker og andre bevegelige enheter ikke kan stoppes, og &#xE5; tvinge dem til &#xE5; vente vil resultere i tapte data. N&#xE5;r ingen I/O er i gang, kan CPUen ha alle busssyklusene for seg selv til &#xE5; referere til minnet.</p>
+<h1 class="mume-header" id="digitalt-logikkniv%C3%A5">Digitalt logikkniv&#xE5;</h1>
+
+<h2 class="mume-header" id="32-grunnleggende-digitale-logiske-kretser">3.2 Grunnleggende digitale logiske kretser</h2>
+
+<h3 class="mume-header" id="322-kombinasjonskretser">3.2.2 Kombinasjonskretser</h3>
+
+<h4 class="mume-header" id="multipleksere">Multipleksere</h4>
+
+<p>En multiplekser er en krets med <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">2^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span> datainnganger, en datautgang og <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span> kontrollinnganger som velger en av datainngangene.</p>
+<h4 class="mume-header" id="dekodere">Dekodere</h4>
+
+<p>En dekoder er en krets som tar et <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span>-bit nummer som input og bruker det til &#xE5; velge (dvs. satt til <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>) n&#xF8;yaktig en av <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">2^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span> utgangslinjene.</p>
+<h3 class="mume-header" id="323-aritmetiske-kretser">3.2.3 Aritmetiske kretser</h3>
+
+<h4 class="mume-header" id="addere">Addere</h4>
+
+<h5 class="mume-header" id="halvhugger">Halvhugger</h5>
+
+<p>En halv adderer tar to 1-bits innganger <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span> og <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span> og gir ut <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span></span></span></span>, summen av inngangene, og <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span>, b&#xE6;rebiten. Den er bygget av &#xE9;n OG-port og &#xE9;n XOR-port.</p>
+<h5 class="mume-header" id="full-adder">Full adder</h5>
+
+<p>En full adderer tar tre 1-bits innganger <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span>, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span> og <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mrow><mi>i</mi><mi>n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">C_{in}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">in</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, (carry in) og gir ut <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span></span></span></span>, summen av inngangene, og <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mrow><mi>o</mi><mi>u</mi><mi>t</mi></mrow></msub></mrow><annotation encoding="application/x-tex">C_{out}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, carry-en bit. Den er bygget av to halvhuggormer.</p>
+<h5 class="mume-header" id="ripple-b%C3%A6re-huggorm">Ripple b&#xE6;re huggorm</h5>
+
+<p>For &#xE5; bygge en adderer for for eksempel to 16-bits ord, replikerer man bare hele adderen 16 ganger. B&#xE6;ren av et bitt brukes som b&#xE6;re inn til venstre nabo. B&#xE6;ren inn i biten lengst til h&#xF8;yre kobles til 0. Denne typen adderer kalles en <em>rippelb&#xE6;readderer</em>, fordi i verste fall, ved &#xE5; legge til 1 til 111...111 (bin&#xE6;r), kan addisjonen ikke fullf&#xF8;res f&#xF8;r b&#xE6;ren har kruset hele veien fra biten lengst til h&#xF8;yre til biten lengst til venstre. Addere som ikke har denne forsinkelsen, og dermed er raskere, finnes ogs&#xE5; og foretrekkes vanligvis.</p>
+<h2 class="mume-header" id="33-minne">3.3 Minne</h2>
+
+<h3 class="mume-header" id="332-flip-flops">3.3.2 Flip-flops</h3>
+
+<p>I mange kretser er det n&#xF8;dvendig &#xE5; sample verdien p&#xE5; en bestemt linje p&#xE5; et bestemt tidspunkt og lagre den. I denne varianten, kalt en flip-flop, skjer tilstandsovergangen ikke n&#xE5;r klokken er 1, men under klokkeovergangen fra 0 til 1 (stigende flanke) eller fra 1 til 0 (fallende flanke) i stedet. Dermed er lengden p&#xE5; klokkepulsen uviktig, s&#xE5; lenge overgangene skjer raskt.</p>
+<h3 class="mume-header" id="333-registrerer">3.3.3 Registrerer</h3>
+
+<p>Flip-flops kan kombineres i grupper for &#xE5; lage registre som inneholder datatyper som er st&#xF8;rre enn 1 bit i lengde.</p>
+<h3 class="mume-header" id="335-minnebrikker">3.3.5 Minnebrikker</h3>
+
+<p>En minnebrikke trenger vanligvis en adressebuss, databuss og noen f&#xE5; styresignaler. CS (chip select) brukes til &#xE5; velge (aktivere) brikken.</p>
+<h3 class="mume-header" id="336-ram-er-og-rom-er">3.3.6 RAM-er og ROM-er</h3>
+
+<h4 class="mume-header" id="sram-vs-dram">SRAM vs DRAM</h4>
+
+<p>RAM-er kommer i to varianter, statisk og dynamisk. Statiske RAM-er<br>
+(SRAM-er) er konstruert internt ved &#xE5; bruke kretser som ligner p&#xE5; v&#xE5;r grunnleggende D-flip-flop. Disse minnene har den egenskapen at innholdet beholdes s&#xE5; lenge str&#xF8;mmen holdes p&#xE5;: sekunder, minutter, timer, til og med dager. Statiske RAM-er er veldig raske. En typisk tilgangstid er i st&#xF8;rrelsesorden et nanosekund eller mindre. Av denne grunn er statiske RAM-er popul&#xE6;re som cache-minne. Dynamiske RAM-er (DRAM-er), derimot, bruker ikke flip-flops. I stedet er en dynamisk RAM en rekke celler, hver celle inneholder en transistor og en liten kondensator. Kondensatorene kan lades eller utlades, slik at 0-er og 1-ere kan lagres. Fordi den elektriske ladningen har en tendens til &#xE5; lekke ut, m&#xE5; hver bit i en dynamisk RAM oppdateres (lastes p&#xE5; nytt) med noen millisekunder for &#xE5; forhindre at dataene lekker bort. Fordi ekstern logikk m&#xE5; ta seg av oppfriskningen, krever dynamiske RAM-er mer komplekse grensesnitt enn statiske, selv om denne ulempen i mange applikasjoner kompenseres for av deres st&#xF8;rre kapasitet. Siden dynamiske RAM-er bare trenger &#xE9;n transistor og &#xE9;n kondensator per bit (mot seks transistorer per bit for best statisk RAM), har dynamiske RAM-er en veldig h&#xF8;y tetthet (mange biter per brikke). Av denne grunn er hovedminner nesten alltid bygget ut av dynamiske RAM-er. Denne store kapasiteten har imidlertid en pris: dynamiske RAM-er er trege (titalls nanosekunder). Dermed fors&#xF8;ker kombinasjonen av en statisk RAM-cache og et dynamisk RAM-hovedminne &#xE5; kombinere de gode egenskapene til hver.</p>
+<h4 class="mume-header" id="ikke-flyktige-minnebrikker-rom-er">Ikke-flyktige minnebrikker (ROM-er)</h4>
+
+<p>RAM er ikke den eneste typen minnebrikker. I mange applikasjoner, som leker, apparater og biler, m&#xE5; programmet og noen av dataene forbli lagret selv n&#xE5;r str&#xF8;mmen er sl&#xE5;tt av. Videre, n&#xE5;r det er installert, endres verken programmet eller dataene noen gang. Disse kravene har f&#xF8;rt til utviklingen av ROM-er (Read-Only Memories), som ikke kan endres eller slettes, med vilje eller p&#xE5; annen m&#xE5;te. Dataene i en ROM settes inn under fremstillingen, hovedsakelig ved &#xE5; eksponere et fotosensitivt materiale gjennom en maske som inneholder det &#xF8;nskede bitm&#xF8;nsteret og deretter etse bort den eksponerte (eller ueksponerte) overflaten. Den eneste m&#xE5;ten &#xE5; endre programmet i en ROM er &#xE5; erstatte hele brikken.</p>
+<h2 class="mume-header" id="34-cpu-brikker-og-busser">3.4 CPU-brikker og busser</h2>
+
+<h3 class="mume-header" id="342-databusser">3.4.2 Databusser</h3>
+
+<p>En buss er en felles elektrisk vei mellom flere enheter. Busser kan kategoriseres etter funksjon. De kan brukes internt i CPU-en for &#xE5; transportere data til og fra ALU, eller eksterne til CPU-en for &#xE5; koble den til minne eller til I/O-enheter. Hver type buss har sine egne krav og egenskaper.</p>
+<h4 class="mume-header" id="bussprotokoll">Bussprotokoll</h4>
+
+<p>For &#xE5; gj&#xF8;re det mulig for tavler designet av tredjeparter &#xE5; feste seg til systembussen, m&#xE5; det v&#xE6;re godt definerte regler for hvordan den eksterne bussen fungerer, som alle enheter som er koblet til den skal f&#xF8;lge. Disse reglene kalles <em>bussprotokollen</em>.</p>
+<p>Noen enheter som kobles til en buss er aktive og kan starte bussoverf&#xF8;ringer, mens andre er passive og venter p&#xE5; foresp&#xF8;rsler. De aktive kalles <em>mestere</em>; de passive kalles <em>slaver</em>. N&#xE5;r CPUen beordrer en diskkontroller til &#xE5; lese eller skrive en blokk, fungerer CPU som en master og diskkontrolleren fungerer som en slave.</p>
+<h3 class="mume-header" id="343-bussbredde">3.4.3 Bussbredde</h3>
+
+<p>Jo flere adresselinjer en buss har, jo mer minne kan CPU adressere direkte. Hvis en buss har <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span> adresselinjer, kan en CPU bruke den til &#xE5; adressere <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">2^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span> forskjellige minneplasseringer.</p>
+<h4 class="mume-header" id="multipleks-buss">Multipleks buss</h4>
+
+<p>Derfor er den vanlige tiln&#xE6;rmingen for &#xE5; forbedre ytelsen &#xE5; legge til flere datalinjer. Som du kanskje forventer, f&#xF8;rer imidlertid ikke denne inkrementelle veksten til et rent design til slutt. For &#xE5; omg&#xE5; problemet med veldig brede busser, velger noen ganger designere en multipleksbuss. I denne utformingen, i stedet for at adresse- og datalinjene er separate, er det for eksempel 32 linjer for adresse og data sammen. Ved oppstart av en bussdrift brukes linjene til adressen. Senere brukes de til data. For en skriv til minne betyr dette for eksempel at adresselinjene m&#xE5; settes opp og forplantes til minnet f&#xF8;r dataene kan settes p&#xE5; bussen. Multipleksing av linjene reduserer bussbredden (og kostnadene), men resulterer i et tregere system.</p>
+<h3 class="mume-header" id="344-bussklokke">3.4.4 Bussklokke</h3>
+
+<p>Busser kan deles inn i to forskjellige kategorier avhengig av klokkeslett. En <em>synkron buss</em> har en linje drevet av en krystalloscillator. Signalet p&#xE5; denne linjen best&#xE5;r av en firkantb&#xF8;lge med en frekvens vanligvis mellom 5 og 133 MHz. Alle bussaktiviteter tar et integrert antall av disse syklusene, kalt busssykluser. Den andre typen buss, <em>asynkron buss</em>, har ikke en masterklokke. Busssykluser kan v&#xE6;re av hvilken som helst lengde som kreves og trenger ikke v&#xE6;re den samme mellom alle par med enheter.</p>
+<h3 class="mume-header" id="345-buss-voldgift">3.4.5 Buss voldgift</h3>
+
+<p>&quot;Hva skjer hvis to eller flere enheter alle &#xF8;nsker &#xE5; bli bussmester samtidig?&quot; Svaret er at det trengs en eller annen buss-voldgiftsmekanisme for &#xE5; forhindre kaos. Voldgiftsmekanismer kan v&#xE6;re sentraliserte eller desentraliserte. I sentralisert voldgift bestemmer en enkelt bussdommer hvem som g&#xE5;r videre. Desentralisert voldgift kan implementeres p&#xE5; flere m&#xE5;ter, men det inneb&#xE6;rer vanligvis at enhetene m&#xE5; sjekke om bussen er gratis &#xE5; bruke f&#xF8;r den tas i bruk.</p>
+<h3 class="mume-header" id="346-bussdrift">3.4.6 Bussdrift</h3>
+
+<h4 class="mume-header" id="blokker-overf%C3%B8ring">Blokker overf&#xF8;ring</h4>
+
+<p>Ofte kan blokkoverf&#xF8;ringer gj&#xF8;res mer effektive enn suksessive individuelle overf&#xF8;ringer. N&#xE5;r en blokklesing startes, forteller bussmasteren slaven hvor mange ord som skal overf&#xF8;res, for eksempel ved &#xE5; sette ordtellingen p&#xE5; datalinjene. I stedet for bare &#xE5; returnere ett ord, sender slaven ut ett ord i l&#xF8;pet av hver syklus til tellingen er oppbrukt.</p>
+<h4 class="mume-header" id="lese-endre-skrive-busssyklus">Lese-endre-skrive busssyklus</h4>
+
+<p>Lar enhver CPU lese et ord fra minnet, inspisere og endre det, og skrive det tilbake til minnet, alt uten &#xE5; slippe bussen. Denne typen syklus forhindrer konkurrerende CPU-er fra &#xE5; kunne bruke bussen og dermed forstyrre den f&#xF8;rste CPU-driften.</p>
+<h4 class="mume-header" id="avbryter">Avbryter</h4>
+
+<p>N&#xE5;r CPU-en kommanderer en I/O-enhet til &#xE5; gj&#xF8;re noe, forventer den vanligvis et avbrudd n&#xE5;r arbeidet er gjort. Avbruddssignaleringen krever bussen. Siden flere enheter kanskje vil for&#xE5;rsake et avbrudd samtidig, er det samme type voldgiftsproblemer som vi hadde med vanlige busssykluser. Den vanlige l&#xF8;sningen er &#xE5; tildele prioriteringer til enheter og bruke en sentralisert arbiter for &#xE5; prioritere de mest tidskritiske enhetene.</p>
+<h1 class="mume-header" id="microarchitecture-level">Microarchitecture level</h1>
+
+<h2 class="mume-header" id="42-an-example-isa-ijvm">4.2 An example ISA: IJVM</h2>
+
+<p><em>Low priority</em></p>
+<h3 class="mume-header" id="421-stacks">4.2.1 Stacks</h3>
+
+<p><em>Low priority</em></p>
+<h3 class="mume-header" id="422-the-ijvm-memory-model">4.2.2 The IJVM memory model</h3>
+
+<p><em>Low priority</em></p>
+<h3 class="mume-header" id="423-the-ijvm-instruciton-set">4.2.3 The IJVM instruciton set</h3>
+
+<p><em>Low priority</em></p>
+<h2 class="mume-header" id="43-an-example-implementation">4.3 An example implementation</h2>
+
+<h3 class="mume-header" id="431-microinstructions-and-notation">4.3.1 Microinstructions and notation</h3>
+
+<h3 class="mume-header" id="432-implementation-of-ijvm-using-the-mic-1">4.3.2 Implementation of IJVM using the mic-1</h3>
+
+<h2 class="mume-header" id="44-design-of-the-microarchitecture-level">4.4 Design of the microarchitecture level</h2>
+
+<h3 class="mume-header" id="441-speed-versus-cost">4.4.1 Speed versus cost</h3>
+
+<h3 class="mume-header" id="442-reducing-the-execution-path-length">4.4.2 Reducing the execution path length</h3>
+
+<h3 class="mume-header" id="443-a-design-with-prefetching-the-mic-2">4.4.3 A design with prefetching: the mic-2</h3>
+
+<h3 class="mume-header" id="444-a-pipelined-design-the-mic-3">4.4.4 A pipelined design: the mic-3</h3>
+
+<h3 class="mume-header" id="445-a-seven-stage-pipeline-the-mic-4">4.4.5 A seven-stage pipeline: the mic-4</h3>
+
+<h2 class="mume-header" id="45-improving-performance">4.5 Improving performance</h2>
+
+<h3 class="mume-header" id="451-cache-memory">4.5.1 Cache memory</h3>
+
+<h3 class="mume-header" id="452-branch-prediction">4.5.2 Branch prediction</h3>
+
+<h2 class="mume-header" id="81-on-chip-parallelism">8.1 On-chip parallelism</h2>
+
+<h3 class="mume-header" id="811-instruction-level-parallelism-ila">8.1.1 Instruction-level parallelism (ILA)</h3>
+
+<h3 class="mume-header" id="812-on-chip-multithreading">8.1.2 On-chip multithreading</h3>
+
+<h1 class="mume-header" id="instruction-set-architecture-level-isa">Instruction set architecture level (ISA)</h1>
+
+<h2 class="mume-header" id="51-overview-of-the-isa-level">5.1 Overview of the ISA level</h2>
+
+<h3 class="mume-header" id="511-properties-of-the-isa-level">5.1.1 Properties of the ISA level</h3>
+
+<h3 class="mume-header" id="512-memory-models">5.1.2 Memory models</h3>
+
+<h3 class="mume-header" id="513-registers">5.1.3 Registers</h3>
+
+<h2 class="mume-header" id="53-instruction-formats">5.3 Instruction formats</h2>
+
+<h3 class="mume-header" id="531-design-criteria-for-instruction-formats">5.3.1 Design criteria for instruction formats</h3>
+
+<h3 class="mume-header" id="531-expanding-opcodes">5.3.1 Expanding opcodes</h3>
+
+<h2 class="mume-header" id="54-addressing">5.4 Addressing</h2>
+
+<p><code>TODO: Addressing modes 5.4.2-5.4.7</code></p>
+<h2 class="mume-header" id="55-instruction-types">5.5 Instruction types</h2>
+
+<p><code>TODO: Instruction types 5.5.1-5.5.7</code></p>
+<h2 class="mume-header" id="56-flow-of-control">5.6 Flow of control</h2>
+
+<h3 class="mume-header" id="561-sequential-flow-of-control-and-branches">5.6.1 Sequential flow of control and branches</h3>
+
+<h3 class="mume-header" id="562-procedures">5.6.2 Procedures</h3>
+
+<h2 class="mume-header" id="71-introduction-to-the-assembly-language">7.1 Introduction to the Assembly language</h2>
+
+<p><em>Regarded as trivial.</em></p>
+<h2 class="mume-header" id="73-the-assembly-process">7.3 The Assembly process</h2>
+
+<p><em>Regarded as trivial.</em></p>
+<h1 class="mume-header" id="virtual-memory">Virtual memory</h1>
+
+<h2 class="mume-header" id="61-virtual-memory">6.1 Virtual memory</h2>
+
+<h3 class="mume-header" id="611-paging">6.1.1 Paging</h3>
+
+<h3 class="mume-header" id="612-implementation-of-paging">6.1.2 Implementation of paging</h3>
+
+<h3 class="mume-header" id="613-demand-paging-and-the-working-set-model">6.1.3 Demand paging and the working-set model</h3>
+
+<h3 class="mume-header" id="614-page-replacement-policy">6.1.4 Page-replacement policy</h3>
+
+<h3 class="mume-header" id="615-page-size-and-fragmentation">6.1.5 Page size and fragmentation</h3>
+
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

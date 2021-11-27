@@ -1,12 +1,15 @@
 
 # Notes from STRUCTURED COMPUTER ORGANIZATION SIXTH EDITION
 
-Based on Odd Runes *TDT4160 Haust 2021 Pensum og
+
+Based on Odd Rune's *TDT4160 Haust 2021 Pensum og
 stikkord*.
 
 Note: this will only include information which is regarded as "non-trivial".
 
 This document is hosted at [magne.dev](https://magne.dev/TDT4160)
+- [Norwegian version](https://magne.dev/TDT4160)
+- [English version](https://magne.dev/TDT4160/norwegian.html)
 
 # Table of contents
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
