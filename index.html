@@ -266,6 +266,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <p>Based on Odd Runes <em>TDT4160 Haust 2021 Pensum og<br>
 stikkord</em>.</p>
 <p>Note: this will only include information which is regarded as &quot;non-trivial&quot;.</p>
+<p>This document is hosted at <a href="https://magne.dev/TDT4160">magne.dev</a></p>
 <h1 class="mume-header" id="table-of-contents">Table of contents</h1>
 
 <div class="code-chunk" data-id="code-chunk-id-0" data-cmd="toc"><div class="input-div"><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><ul>
@@ -389,27 +390,80 @@ stikkord</em>.</p>
 </li>
 <li><a href="#microarchitecture-level">Microarchitecture level</a>
 <ul>
-<li><a href="#42">4.2</a></li>
-<li><a href="#43">4.3</a></li>
-<li><a href="#44">4.4</a></li>
-<li><a href="#45">4.5</a></li>
-<li><a href="#81">8.1</a></li>
+<li><a href="#42-an-example-isa-ijvm">4.2 An example ISA: IJVM</a>
+<ul>
+<li><a href="#421-stacks">4.2.1 Stacks</a></li>
+<li><a href="#422-the-ijvm-memory-model">4.2.2 The IJVM memory model</a></li>
+<li><a href="#423-the-ijvm-instruciton-set">4.2.3 The IJVM instruciton set</a></li>
+</ul>
+</li>
+<li><a href="#43-an-example-implementation">4.3 An example implementation</a>
+<ul>
+<li><a href="#431-microinstructions-and-notation">4.3.1 Microinstructions and notation</a></li>
+<li><a href="#432-implementation-of-ijvm-using-the-mic-1">4.3.2 Implementation of IJVM using the mic-1</a></li>
+</ul>
+</li>
+<li><a href="#44-design-of-the-microarchitecture-level">4.4 Design of the microarchitecture level</a>
+<ul>
+<li><a href="#441-speed-versus-cost">4.4.1 Speed versus cost</a></li>
+<li><a href="#442-reducing-the-execution-path-length">4.4.2 Reducing the execution path length</a></li>
+<li><a href="#443-a-design-with-prefetching-the-mic-2">4.4.3 A design with prefetching: the mic-2</a></li>
+<li><a href="#444-a-pipelined-design-the-mic-3">4.4.4 A pipelined design: the mic-3</a></li>
+<li><a href="#445-a-seven-stage-pipeline-the-mic-4">4.4.5 A seven-stage pipeline: the mic-4</a></li>
+</ul>
+</li>
+<li><a href="#45-improving-performance">4.5 Improving performance</a>
+<ul>
+<li><a href="#451-cache-memory">4.5.1 Cache memory</a></li>
+<li><a href="#452-branch-prediction">4.5.2 Branch prediction</a></li>
+</ul>
+</li>
+<li><a href="#81-on-chip-parallelism">8.1 On-chip parallelism</a>
+<ul>
+<li><a href="#811-instruction-level-parallelism-ila">8.1.1 Instruction-level parallelism (ILA)</a></li>
+<li><a href="#812-on-chip-multithreading">8.1.2 On-chip multithreading</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#instruction-set-architecture-level-isa">Instruction set architecture level (ISA)</a>
 <ul>
-<li><a href="#51">5.1</a></li>
-<li><a href="#53">5.3</a></li>
-<li><a href="#54">5.4</a></li>
-<li><a href="#55">5.5</a></li>
-<li><a href="#56">5.6</a></li>
-<li><a href="#71">7.1</a></li>
-<li><a href="#73">7.3</a></li>
+<li><a href="#51-overview-of-the-isa-level">5.1 Overview of the ISA level</a>
+<ul>
+<li><a href="#511-properties-of-the-isa-level">5.1.1 Properties of the ISA level</a></li>
+<li><a href="#512-memory-models">5.1.2 Memory models</a></li>
+<li><a href="#513-registers">5.1.3 Registers</a></li>
+</ul>
+</li>
+<li><a href="#53-instruction-formats">5.3 Instruction formats</a>
+<ul>
+<li><a href="#531-design-criteria-for-instruction-formats">5.3.1 Design criteria for instruction formats</a></li>
+<li><a href="#531-expanding-opcodes">5.3.1 Expanding opcodes</a></li>
+</ul>
+</li>
+<li><a href="#54-addressing">5.4 Addressing</a></li>
+<li><a href="#55-instruction-types">5.5 Instruction types</a></li>
+<li><a href="#56-flow-of-control">5.6 Flow of control</a>
+<ul>
+<li><a href="#561-sequential-flow-of-control-and-branches">5.6.1 Sequential flow of control and branches</a></li>
+<li><a href="#562-procedures">5.6.2 Procedures</a></li>
+</ul>
+</li>
+<li><a href="#71-introduction-to-the-assembly-language">7.1 Introduction to the Assembly language</a></li>
+<li><a href="#73-the-assembly-process">7.3 The Assembly process</a></li>
 </ul>
 </li>
 <li><a href="#virtual-memory">Virtual memory</a>
 <ul>
-<li><a href="#61">6.1</a></li>
+<li><a href="#61-virtual-memory">6.1 Virtual memory</a>
+<ul>
+<li><a href="#611-paging">6.1.1 Paging</a></li>
+<li><a href="#612-implementation-of-paging">6.1.2 Implementation of paging</a></li>
+<li><a href="#613-demand-paging-and-the-working-set-model">6.1.3 Demand paging and the working-set model</a></li>
+<li><a href="#614-page-replacement-policy">6.1.4 Page-replacement policy</a></li>
+<li><a href="#615-page-size-and-fragmentation">6.1.5 Page size and fragmentation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -639,35 +693,93 @@ stikkord</em>.</p>
 <p><code>TODO</code></p>
 <h1 class="mume-header" id="microarchitecture-level">Microarchitecture level</h1>
 
-<h2 class="mume-header" id="42">4.2</h2>
+<h2 class="mume-header" id="42-an-example-isa-ijvm">4.2 An example ISA: IJVM</h2>
 
-<h2 class="mume-header" id="43">4.3</h2>
+<p><code>Low priority.</code></p>
+<h3 class="mume-header" id="421-stacks">4.2.1 Stacks</h3>
 
-<h2 class="mume-header" id="44">4.4</h2>
+<p><code>Low priority.</code></p>
+<h3 class="mume-header" id="422-the-ijvm-memory-model">4.2.2 The IJVM memory model</h3>
 
-<h2 class="mume-header" id="45">4.5</h2>
+<p><code>Low priority.</code></p>
+<h3 class="mume-header" id="423-the-ijvm-instruciton-set">4.2.3 The IJVM instruciton set</h3>
 
-<h2 class="mume-header" id="81">8.1</h2>
+<p><code>Low priority.</code></p>
+<h2 class="mume-header" id="43-an-example-implementation">4.3 An example implementation</h2>
+
+<h3 class="mume-header" id="431-microinstructions-and-notation">4.3.1 Microinstructions and notation</h3>
+
+<h3 class="mume-header" id="432-implementation-of-ijvm-using-the-mic-1">4.3.2 Implementation of IJVM using the mic-1</h3>
+
+<h2 class="mume-header" id="44-design-of-the-microarchitecture-level">4.4 Design of the microarchitecture level</h2>
+
+<h3 class="mume-header" id="441-speed-versus-cost">4.4.1 Speed versus cost</h3>
+
+<h3 class="mume-header" id="442-reducing-the-execution-path-length">4.4.2 Reducing the execution path length</h3>
+
+<h3 class="mume-header" id="443-a-design-with-prefetching-the-mic-2">4.4.3 A design with prefetching: the mic-2</h3>
+
+<h3 class="mume-header" id="444-a-pipelined-design-the-mic-3">4.4.4 A pipelined design: the mic-3</h3>
+
+<h3 class="mume-header" id="445-a-seven-stage-pipeline-the-mic-4">4.4.5 A seven-stage pipeline: the mic-4</h3>
+
+<h2 class="mume-header" id="45-improving-performance">4.5 Improving performance</h2>
+
+<h3 class="mume-header" id="451-cache-memory">4.5.1 Cache memory</h3>
+
+<h3 class="mume-header" id="452-branch-prediction">4.5.2 Branch prediction</h3>
+
+<h2 class="mume-header" id="81-on-chip-parallelism">8.1 On-chip parallelism</h2>
+
+<h3 class="mume-header" id="811-instruction-level-parallelism-ila">8.1.1 Instruction-level parallelism (ILA)</h3>
+
+<h3 class="mume-header" id="812-on-chip-multithreading">8.1.2 On-chip multithreading</h3>
 
 <h1 class="mume-header" id="instruction-set-architecture-level-isa">Instruction set architecture level (ISA)</h1>
 
-<h2 class="mume-header" id="51">5.1</h2>
+<h2 class="mume-header" id="51-overview-of-the-isa-level">5.1 Overview of the ISA level</h2>
 
-<h2 class="mume-header" id="53">5.3</h2>
+<h3 class="mume-header" id="511-properties-of-the-isa-level">5.1.1 Properties of the ISA level</h3>
 
-<h2 class="mume-header" id="54">5.4</h2>
+<h3 class="mume-header" id="512-memory-models">5.1.2 Memory models</h3>
 
-<h2 class="mume-header" id="55">5.5</h2>
+<h3 class="mume-header" id="513-registers">5.1.3 Registers</h3>
 
-<h2 class="mume-header" id="56">5.6</h2>
+<h2 class="mume-header" id="53-instruction-formats">5.3 Instruction formats</h2>
 
-<h2 class="mume-header" id="71">7.1</h2>
+<h3 class="mume-header" id="531-design-criteria-for-instruction-formats">5.3.1 Design criteria for instruction formats</h3>
 
-<h2 class="mume-header" id="73">7.3</h2>
+<h3 class="mume-header" id="531-expanding-opcodes">5.3.1 Expanding opcodes</h3>
+
+<h2 class="mume-header" id="54-addressing">5.4 Addressing</h2>
+
+<p><code>TODO: Addressing modes 5.4.2-5.4.7</code></p>
+<h2 class="mume-header" id="55-instruction-types">5.5 Instruction types</h2>
+
+<p><code>TODO: Instruction types 5.5.1-5.5.7</code></p>
+<h2 class="mume-header" id="56-flow-of-control">5.6 Flow of control</h2>
+
+<h3 class="mume-header" id="561-sequential-flow-of-control-and-branches">5.6.1 Sequential flow of control and branches</h3>
+
+<h3 class="mume-header" id="562-procedures">5.6.2 Procedures</h3>
+
+<h2 class="mume-header" id="71-introduction-to-the-assembly-language">7.1 Introduction to the Assembly language</h2>
+
+<h2 class="mume-header" id="73-the-assembly-process">7.3 The Assembly process</h2>
 
 <h1 class="mume-header" id="virtual-memory">Virtual memory</h1>
 
-<h2 class="mume-header" id="61">6.1</h2>
+<h2 class="mume-header" id="61-virtual-memory">6.1 Virtual memory</h2>
+
+<h3 class="mume-header" id="611-paging">6.1.1 Paging</h3>
+
+<h3 class="mume-header" id="612-implementation-of-paging">6.1.2 Implementation of paging</h3>
+
+<h3 class="mume-header" id="613-demand-paging-and-the-working-set-model">6.1.3 Demand paging and the working-set model</h3>
+
+<h3 class="mume-header" id="614-page-replacement-policy">6.1.4 Page-replacement policy</h3>
+
+<h3 class="mume-header" id="615-page-size-and-fragmentation">6.1.5 Page size and fragmentation</h3>
 
 
       </div>

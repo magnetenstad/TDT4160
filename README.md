@@ -6,6 +6,8 @@ stikkord*.
 
 Note: this will only include information which is regarded as "non-trivial".
 
+This document is hosted at [magne.dev](https://magne.dev/TDT4160)
+
 # Table of contents
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
@@ -67,21 +69,47 @@ Note: this will only include information which is regarded as "non-trivial".
   - [3.7 Interfacing](#37-interfacing)
     - [3.7.2 Address decoding](#372-address-decoding)
 - [Microarchitecture level](#microarchitecture-level)
-  - [4.2](#42)
-  - [4.3](#43)
-  - [4.4](#44)
-  - [4.5](#45)
-  - [8.1](#81)
+  - [4.2 An example ISA: IJVM](#42-an-example-isa-ijvm)
+    - [4.2.1 Stacks](#421-stacks)
+    - [4.2.2 The IJVM memory model](#422-the-ijvm-memory-model)
+    - [4.2.3 The IJVM instruciton set](#423-the-ijvm-instruciton-set)
+  - [4.3 An example implementation](#43-an-example-implementation)
+    - [4.3.1 Microinstructions and notation](#431-microinstructions-and-notation)
+    - [4.3.2 Implementation of IJVM using the mic-1](#432-implementation-of-ijvm-using-the-mic-1)
+  - [4.4 Design of the microarchitecture level](#44-design-of-the-microarchitecture-level)
+    - [4.4.1 Speed versus cost](#441-speed-versus-cost)
+    - [4.4.2 Reducing the execution path length](#442-reducing-the-execution-path-length)
+    - [4.4.3 A design with prefetching: the mic-2](#443-a-design-with-prefetching-the-mic-2)
+    - [4.4.4 A pipelined design: the mic-3](#444-a-pipelined-design-the-mic-3)
+    - [4.4.5 A seven-stage pipeline: the mic-4](#445-a-seven-stage-pipeline-the-mic-4)
+  - [4.5 Improving performance](#45-improving-performance)
+    - [4.5.1 Cache memory](#451-cache-memory)
+    - [4.5.2 Branch prediction](#452-branch-prediction)
+  - [8.1 On-chip parallelism](#81-on-chip-parallelism)
+    - [8.1.1 Instruction-level parallelism (ILA)](#811-instruction-level-parallelism-ila)
+    - [8.1.2 On-chip multithreading](#812-on-chip-multithreading)
 - [Instruction set architecture level (ISA)](#instruction-set-architecture-level-isa)
-  - [5.1](#51)
-  - [5.3](#53)
-  - [5.4](#54)
-  - [5.5](#55)
-  - [5.6](#56)
-  - [7.1](#71)
-  - [7.3](#73)
+  - [5.1 Overview of the ISA level](#51-overview-of-the-isa-level)
+    - [5.1.1 Properties of the ISA level](#511-properties-of-the-isa-level)
+    - [5.1.2 Memory models](#512-memory-models)
+    - [5.1.3 Registers](#513-registers)
+  - [5.3 Instruction formats](#53-instruction-formats)
+    - [5.3.1 Design criteria for instruction formats](#531-design-criteria-for-instruction-formats)
+    - [5.3.1 Expanding opcodes](#531-expanding-opcodes)
+  - [5.4 Addressing](#54-addressing)
+  - [5.5 Instruction types](#55-instruction-types)
+  - [5.6 Flow of control](#56-flow-of-control)
+    - [5.6.1 Sequential flow of control and branches](#561-sequential-flow-of-control-and-branches)
+    - [5.6.2 Procedures](#562-procedures)
+  - [7.1 Introduction to the Assembly language](#71-introduction-to-the-assembly-language)
+  - [7.3 The Assembly process](#73-the-assembly-process)
 - [Virtual memory](#virtual-memory)
-  - [6.1](#61)
+  - [6.1 Virtual memory](#61-virtual-memory)
+    - [6.1.1 Paging](#611-paging)
+    - [6.1.2 Implementation of paging](#612-implementation-of-paging)
+    - [6.1.3 Demand paging and the working-set model](#613-demand-paging-and-the-working-set-model)
+    - [6.1.4 Page-replacement policy](#614-page-replacement-policy)
+    - [6.1.5 Page size and fragmentation](#615-page-size-and-fragmentation)
 
 <!-- /code_chunk_output -->
 
@@ -268,33 +296,88 @@ Regarded as trivial.
 
 # Microarchitecture level
 
-## 4.2
+## 4.2 An example ISA: IJVM
+`Low priority.`
+### 4.2.1 Stacks
+`Low priority.`
+### 4.2.2 The IJVM memory model
+`Low priority.`
+### 4.2.3 The IJVM instruciton set
+`Low priority.`
 
-## 4.3
+## 4.3 An example implementation
 
-## 4.4
+### 4.3.1 Microinstructions and notation
 
-## 4.5
+### 4.3.2 Implementation of IJVM using the mic-1
 
-## 8.1
+## 4.4 Design of the microarchitecture level
+
+### 4.4.1 Speed versus cost
+
+### 4.4.2 Reducing the execution path length
+
+### 4.4.3 A design with prefetching: the mic-2
+
+### 4.4.4 A pipelined design: the mic-3
+
+### 4.4.5 A seven-stage pipeline: the mic-4
+
+## 4.5 Improving performance
+
+### 4.5.1 Cache memory
+
+### 4.5.2 Branch prediction
+
+## 8.1 On-chip parallelism
+
+### 8.1.1 Instruction-level parallelism (ILA)
+
+### 8.1.2 On-chip multithreading
 
 # Instruction set architecture level (ISA)
 
-## 5.1
+## 5.1 Overview of the ISA level
 
-## 5.3
+### 5.1.1 Properties of the ISA level
 
-## 5.4
+### 5.1.2 Memory models
 
-## 5.5
+### 5.1.3 Registers
 
-## 5.6
+## 5.3 Instruction formats
 
-## 7.1
+### 5.3.1 Design criteria for instruction formats
 
-## 7.3
+### 5.3.1 Expanding opcodes
+
+## 5.4 Addressing
+`TODO: Addressing modes 5.4.2-5.4.7`
+
+## 5.5 Instruction types
+`TODO: Instruction types 5.5.1-5.5.7`
+
+## 5.6 Flow of control
+
+### 5.6.1 Sequential flow of control and branches
+
+### 5.6.2 Procedures
+
+## 7.1 Introduction to the Assembly language
+
+## 7.3 The Assembly process
 
 # Virtual memory
 
-## 6.1
+## 6.1 Virtual memory
 
+### 6.1.1 Paging
+
+### 6.1.2 Implementation of paging
+
+### 6.1.3 Demand paging and the working-set model
+
+### 6.1.4 Page-replacement policy
+
+### 6.1.5 Page size and fragmentation
+ 
