@@ -1,15 +1,12 @@
 
 # Notes from STRUCTURED COMPUTER ORGANIZATION SIXTH EDITION
 
-
 Based on Odd Rune's *TDT4160 Haust 2021 Pensum og
 stikkord*.
 
 Note: this will only include information which is regarded as "non-trivial".
 
 This document is hosted at [magne.dev](https://magne.dev/TDT4160)
-- [Norwegian version](https://magne.dev/TDT4160/norwegian.html)
-- [English version](https://magne.dev/TDT4160)
 
 # Table of contents
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
@@ -72,20 +69,13 @@ This document is hosted at [magne.dev](https://magne.dev/TDT4160)
       - [Interrupts](#interrupts)
 - [Microarchitecture level](#microarchitecture-level)
   - [4.2 An example ISA: IJVM](#42-an-example-isa-ijvm)
-    - [4.2.1 Stacks](#421-stacks)
-    - [4.2.2 The IJVM memory model](#422-the-ijvm-memory-model)
-    - [4.2.3 The IJVM instruciton set](#423-the-ijvm-instruciton-set)
   - [4.3 An example implementation](#43-an-example-implementation)
-    - [4.3.1 Microinstructions and notation](#431-microinstructions-and-notation)
-    - [4.3.2 Implementation of IJVM using the mic-1](#432-implementation-of-ijvm-using-the-mic-1)
   - [4.4 Design of the microarchitecture level](#44-design-of-the-microarchitecture-level)
     - [4.4.1 Speed versus cost](#441-speed-versus-cost)
-    - [4.4.2 Reducing the execution path length](#442-reducing-the-execution-path-length)
-    - [4.4.3 A design with prefetching: the mic-2](#443-a-design-with-prefetching-the-mic-2)
-    - [4.4.4 A pipelined design: the mic-3](#444-a-pipelined-design-the-mic-3)
-    - [4.4.5 A seven-stage pipeline: the mic-4](#445-a-seven-stage-pipeline-the-mic-4)
   - [4.5 Improving performance](#45-improving-performance)
     - [4.5.1 Cache memory](#451-cache-memory)
+      - [Direct-mapped caches](#direct-mapped-caches)
+      - [Set-associative caches](#set-associative-caches)
     - [4.5.2 Branch prediction](#452-branch-prediction)
   - [8.1 On-chip parallelism](#81-on-chip-parallelism)
     - [8.1.1 Instruction-level parallelism (ILA)](#811-instruction-level-parallelism-ila)
@@ -99,12 +89,20 @@ This document is hosted at [magne.dev](https://magne.dev/TDT4160)
     - [5.3.1 Design criteria for instruction formats](#531-design-criteria-for-instruction-formats)
     - [5.3.1 Expanding opcodes](#531-expanding-opcodes)
   - [5.4 Addressing](#54-addressing)
+    - [5.4.2 Immidiate addressing](#542-immidiate-addressing)
+    - [5.4.3 Direct addressing](#543-direct-addressing)
+    - [5.4.4 Register addressing](#544-register-addressing)
+    - [5.4.5 Register indirect addressing](#545-register-indirect-addressing)
+    - [5.4.6 Indexed addressing](#546-indexed-addressing)
+    - [5.4.7 Based-Indexed Addressing](#547-based-indexed-addressing)
   - [5.5 Instruction types](#55-instruction-types)
-  - [5.6 Flow of control](#56-flow-of-control)
-    - [5.6.1 Sequential flow of control and branches](#561-sequential-flow-of-control-and-branches)
-    - [5.6.2 Procedures](#562-procedures)
-  - [7.1 Introduction to the Assembly language](#71-introduction-to-the-assembly-language)
-  - [7.3 The Assembly process](#73-the-assembly-process)
+    - [5.5.1 Data movement instructions](#551-data-movement-instructions)
+    - [5.5.2 Dyadic operations](#552-dyadic-operations)
+    - [5.5.3 Monadic operations](#553-monadic-operations)
+    - [5.5.4 Comparisons and conditional branches](#554-comparisons-and-conditional-branches)
+    - [5.5.5 Procedure call instructions](#555-procedure-call-instructions)
+    - [5.5.6 Loop control](#556-loop-control)
+    - [5.5.7 Input/output](#557-inputoutput)
 - [Virtual memory](#virtual-memory)
   - [6.1 Virtual memory](#61-virtual-memory)
     - [6.1.1 Paging](#611-paging)
@@ -316,76 +314,155 @@ When the CPU commands an I/O device to do something, it usually expects an inter
 
 ## 4.2 An example ISA: IJVM
 *Low priority*
-### 4.2.1 Stacks
-*Low priority*
-### 4.2.2 The IJVM memory model
-*Low priority*
-### 4.2.3 The IJVM instruciton set
-*Low priority*
+- 4.2.1 Stacks
+- 4.2.2 The IJVM memory model
+- 4.2.3 The IJVM instruciton set
 
 ## 4.3 An example implementation
-
-### 4.3.1 Microinstructions and notation
-
-### 4.3.2 Implementation of IJVM using the mic-1
+*Low priority*
+- 4.3.1 Microinstructions and notation
+- 4.3.2 Implementation of IJVM using the mic-1
 
 ## 4.4 Design of the microarchitecture level
-
 ### 4.4.1 Speed versus cost
+Speed can be measured in a variety of ways, but given a circuit technology and an ISA, there are three basic approaches for increasing the speed of execution:
+1. Reduce the number of clock cycles needed to execute an instruction.
+2. Simplify the organization so that the clock cycle can be shorter.
+3. Overlap the execution of instructions
 
-### 4.4.2 Reducing the execution path length
-
-### 4.4.3 A design with prefetching: the mic-2
-
-### 4.4.4 A pipelined design: the mic-3
-
-### 4.4.5 A seven-stage pipeline: the mic-4
+*The following (4.4.2 - 4.4.5) might be useful, but have not been prioritized. Read the book for details.*
+- 4.4.2 Reducing the execution path length
+- 4.4.3 A design with prefetching: the mic-2
+- 4.4.4 A pipelined design: the mic-3
+- 4.4.5 A seven-stage pipeline: the mic-4
 
 ## 4.5 Improving performance
 
 ### 4.5.1 Cache memory
+See [2.2.5 Cache memory](#225-cache-memory) for an introduction to caches.
+
+All caches use the following model. Main memory is divided up into fixed size blocks called cache lines. A cache line typically consists of 4 to 64 consecutive bytes. Lines are numbered consecutively starting at 0, so with a 32-byte line size, line 0 is bytes 0 to 31, line 1 is bytes 32 to 63, and so on. At any instant, some lines are in the cache. When memory is referenced, the cache controller circuit checks to see if the word referenced is currently in the cache. If so, the value there can be used, saving a trip to main memory. If the word is not there, some line entry is removed from the cache and the line needed is fetched from memory or more distant cache to replace it.
+
+#### Direct-mapped caches
+The simplest cache is known as a direct-mapped cache. Each cache entry consists of three parts:
+1. The `Valid` bit indicates whether there is any valid data in this entry or not. When the system is booted (started), all entries are marked as invalid.
+2. The `Tag` field consists of a unique, 16-bit value identifying the corresponding line of memory from which the data came.
+3. The `Data` field contains a copy of the data in memory. This field holds one cache line of 32 bytes.
+
+In a direct-mapped cache, a given memory word can be stored in exactly one place within the cache. Given a memory address, there is only one place to look for it in the cache. If it is not there, then it is not in the cache. 
+
+#### Set-associative caches
+As mentioned above, many different lines in memory compete for the same cache slots. If a program heavily uses words at addresses 0 and at 65,536, there will be constant conflicts, with each reference potentially evicting the other one from the cache. A solution is to allow two or more lines in each cache entry. A cache with n possible entries for each address is called an n-way set-associative cache.
+
+When a new entry is to be brought into the cache, which of the present items should be discarded? The optimal decision, of course, requires a peek into the future, but a pretty good algorithm for most purposes is LRU (Least Recently Used). This algorithm keeps an ordering of each set of locations that could be accessed from a given memory location. Whenever any of the present lines are accessed, it updates the list, marking that entry the most recently accessed. When it comes time to replace an entry, the one at the end of the list—the least recently accessed—is the one discarded.
 
 ### 4.5.2 Branch prediction
+With good branch prediction, we often don't need to wait for the condition instruction to complete the pipeline before stepping to the next instruction. If the prediction is wrong however, we must backtrack to the branch and take the other route. This may involve a flush of the pipeline.
+
+With *dynamic branch prediction*, branches are predicted at run-time. If a branch has been chosed previously, it will be chosen again. A history table of the branches must be stored.
+
+With *static branch prediction*, branches are predicted at compile-time.
 
 ## 8.1 On-chip parallelism
 
 ### 8.1.1 Instruction-level parallelism (ILA)
+Multiple-issue CPUs come in two varieties: superscalar processors and VLIW (Very Long Instruction Word) processors.
+
+In effect, VLIW shifts the burden of determining which instructions can be issued together from run time to compile time. Not only does this choice make the hardware simpler and faster, but since an optimizing compiler can run for a long time if need be, better bundles can be assembled than what the hardware could do at run time.
 
 ### 8.1.2 On-chip multithreading
+All modern, pipelined CPUs have an inherent problem: when a memory reference misses the level1and level2caches, there is a long wait until the requested word (and its associated cache line) are loaded into the cache, so the pipeline stalls. One approach to dealing with this situation, called on-chip multithreading, allows the CPU to manage multiple threads of control at the same time in an attempt to mask these stalls. In short, if thread 1 is blocked, the CPU still has a chance of running thread 2 in order to keep the hardware fully occupied.
+
+The three main ways of doing on-chip multithreading are:
+- Fine-grained multithreading
+- Coarse-grained multithreading
+- Simultaneous multithreading
 
 # Instruction set architecture level (ISA)
 
 ## 5.1 Overview of the ISA level
 
 ### 5.1.1 Properties of the ISA level
+In principle, the ISA level is defined by how the machine appears to a machine-language programmer. Since no (sane) person does much programming in machine language any more, let us redefine this to say that ISA-level code is what a compiler outputs. To produce ISA-level code, the compiler writer has to know what the memory model is, what registers there are, what data types and instructions are available, and so on. The collection of all this information is what defines the ISA level.
 
 ### 5.1.2 Memory models
+All computers divide memory up into cells that have consecutive addresses. Bytes are generally grouped into 4-byte (32-bit) or 8-byte (64-bit) words with instructions available for manipulating entire words. 
+
+Most machines have a single linear address space at the ISA level, extending from address 0 up to some maximum, often $2^32 − 1$ bytes or $2^64 − 1$ bytes. However, a few machines have separate address spaces for instructions and data (*Hardvard-architecture*), so that an instruction fetch at address 8 goes to a different address space than a data fetch at address 8. This scheme is more complex than having a single address space, but it has two advantages. First, it becomes possible to have $2^32$ bytes of program and an additional $2^32$ bytes of data while using only 32-bit addresses. Second, because all writes automatically go to data space, it becomes impossible for a program to accidentally overwrite itself, thus eliminating one source of program bugs.
 
 ### 5.1.3 Registers
+All computers have some registers visible at the ISA level. They are there to control execution of the program, hold temporary results, and serve other purposes.
+
+ISA-level registers can be roughly divided into two categories: special-purpose registers and general-purpose registers The special-purpose registers include things like the program counter and stack pointer, as well as other registers with a specific function. In contrast, the general-purpose registers are there to hold key local variables and intermediate results of calculations. Their main function is to provide rapid access to heavily used data (basically, avoiding memory accesses). RISC machines, with their fast CPUs and (relatively) slow memories, usually have at least 32 general-purpose registers, and the trend in new CPU designs is to have even more.
+
+One control register that is something of a kernel/user hybrid is the flags register or PSW (Program Status Word). This register holds various miscellaneous bits that are needed by the CPU. The most important bits are the condition codes. These bits are set on every ALU cycle and reflect the status of the result of the
+most recent operation. Typical condition code bits include
+- N — Set when the result was Negative.
+- Z — Set when the result was Zero.
+- V — Set when the result caused an oVerflow.
+- C — Set when the result caused a Carry out of the leftmost bit.
+- A — Set when there was a carry out of bit 3 (Auxiliary carry—see below).
+- P — Set when the result had even Parity.
+
+The condition codes are important because the comparison and conditional branch instructions use them. For example, the CMP instruction typically subtracts two operands and sets the condition codes based on the difference. If the operands are equal, then the difference will be zero and the Z condition code bit in the PSW register will be set. A subsequent BEQ instruction tests the Z bit and branches if it is set.
 
 ## 5.3 Instruction formats
+An instruction consists of an opcode, usually along with some additional information such as where operands come from and where results go to.
 
 ### 5.3.1 Design criteria for instruction formats
+- Short instructions are better than long ones.
+- Sufficient room in the instruction format to express all the operations desired.
+- The number of bits in an address field.
 
 ### 5.3.1 Expanding opcodes
+The idea of expanding opcodes demonstrates a trade-off between the space for opcodes and space for other information.
 
 ## 5.4 Addressing
-`TODO: Addressing modes 5.4.2-5.4.7`
+Most instructions have operands, so some way is needed to specify where they are. This subject, which we will now discuss, is called addressing.
+
+### 5.4.2 Immidiate addressing
+The simplest way for an instruction to specify an operand is for the address part of the instruction actually to contain the operand itself rather than an address or other information describing where the operand is. Such an operand is called an immediate operand because it is automatically fetched from memory at the same time the instruction itself is fetched; hence it is immediately available for use.
+
+### 5.4.3 Direct addressing
+A method for specifying an operand in memory is just to give its full address. This mode is called direct addressing. Like immediate addressing, direct addressing is restricted in its use: the instruction will always access exactly the same memory location. So while the value can change, the location cannot. 
+
+### 5.4.4 Register addressing
+Register addressing is conceptually the same as direct addressing but specifies a register instead of a memory location. Because registers are so important (due to fast access and short addresses) this addressing mode is the most common one on most computers. This addressing mode is known simply as register mode. In load/store architectures, nearly all instructions use this addressing mode exclusively.
+
+### 5.4.5 Register indirect addressing
+In this mode, the operand being specified comes from memory or goes to memory, but its address is not hardwired into the instruction, as in direct addressing. Instead, the address is contained in a register. An address used in this manner is called a *pointer*. A big advantage of register indirect addressing is that it can reference memory without paying the price of having a full memory address in the instruction.
+
+### 5.4.6 Indexed addressing
+Addressing memory by giving a register (explicit or implicit) plus a constant offset is called indexed addressing.
+
+### 5.4.7 Based-Indexed Addressing
+Some machines have an addressing mode in which the memory address is computed by adding up two registers plus an (optional) offset. Sometimes this mode is called based-indexed addressing.
 
 ## 5.5 Instruction types
-`TODO: Instruction types 5.5.1-5.5.7`
 
-## 5.6 Flow of control
+### 5.5.1 Data movement instructions
+Copying data from one place to another is the most fundamental of all operations. Since there are two possible sources for a data item (memory or register), and there are two possible destinations for a data item (memory or register), four different kinds of copying are possible. Some computers have four instructions for the four cases. Others have one instruction for all four cases. Still others use LOAD to go from memory to a register, STORE to go from a register to memory, MOVE to go from one register to another register, and no instruction for a memory-to-memory copy.
 
-### 5.6.1 Sequential flow of control and branches
+### 5.5.2 Dyadic operations
+Dyadic operations combine two operands to produce a result. All ISAs have instructions to perform addition and subtraction on integers. Another group of dyadic operations includes the Boolean instructions.
 
-### 5.6.2 Procedures
+### 5.5.3 Monadic operations
+Monadic operations have one operand and produce one result. Instructions to shift or rotate the contents of a word or byte are quite useful and are often provided in several variations. Shifts are operations in which the bits are moved to the left or right, with bits shifted off the end of the word being lost.
 
-## 7.1 Introduction to the Assembly language
-*Regarded as trivial.*
+### 5.5.4 Comparisons and conditional branches
+See last part of [5.1.3 Registers](#513-registers)
 
-## 7.3 The Assembly process
-*Regarded as trivial.*
+### 5.5.5 Procedure call instructions
+A procedure is a group of instructions that performs some task and that can be invoked (called) from several places in the program. The term subroutine is often used instead of procedure, especially when referring to assembly-language programs. In C, procedures are called functions. When the procedure has finished its task, it must return to the statement after the call. Therefore, the return address must be transmitted to the procedure or saved somewhere so that it can be located when it is time to return.
+
+### 5.5.6 Loop control
+The need to execute a group of instructions a fixed number of times occurs frequently and thus some machines have instructions to facilitate doing this. All the schemes involve a counter that is increased or decreased by some constant once each time through the loop. The counter is also tested once each time through the loop. If a certain condition holds, the loop is terminated.
+
+### 5.5.7 Input/output
+No other group of instructions exhibits as much variety from machine to machine as the I/O instructions. Three different I/O schemes are in current use in personal computers. These are
+1. Programmed I/O with busy waiting.
+2. Interrupt-driven I/O.
+3. DMA I/O.
 
 # Virtual memory
 

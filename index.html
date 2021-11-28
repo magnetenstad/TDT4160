@@ -267,10 +267,6 @@ pre[data-line] .line-highlight[data-end]:after {
 stikkord</em>.</p>
 <p>Note: this will only include information which is regarded as &quot;non-trivial&quot;.</p>
 <p>This document is hosted at <a href="https://magne.dev/TDT4160">magne.dev</a></p>
-<ul>
-<li><a href="https://magne.dev/TDT4160/norwegian.html">Norwegian version</a></li>
-<li><a href="https://magne.dev/TDT4160">English version</a></li>
-</ul>
 <h1 class="mume-header" id="table-of-contents">Table of contents</h1>
 
 <div class="code-chunk" data-id="code-chunk-id-0" data-cmd="toc"><div class="input-div"><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><ul>
@@ -390,31 +386,21 @@ stikkord</em>.</p>
 </li>
 <li><a href="#microarchitecture-level">Microarchitecture level</a>
 <ul>
-<li><a href="#42-an-example-isa-ijvm">4.2 An example ISA: IJVM</a>
-<ul>
-<li><a href="#421-stacks">4.2.1 Stacks</a></li>
-<li><a href="#422-the-ijvm-memory-model">4.2.2 The IJVM memory model</a></li>
-<li><a href="#423-the-ijvm-instruciton-set">4.2.3 The IJVM instruciton set</a></li>
-</ul>
-</li>
-<li><a href="#43-an-example-implementation">4.3 An example implementation</a>
-<ul>
-<li><a href="#431-microinstructions-and-notation">4.3.1 Microinstructions and notation</a></li>
-<li><a href="#432-implementation-of-ijvm-using-the-mic-1">4.3.2 Implementation of IJVM using the mic-1</a></li>
-</ul>
-</li>
+<li><a href="#42-an-example-isa-ijvm">4.2 An example ISA: IJVM</a></li>
+<li><a href="#43-an-example-implementation">4.3 An example implementation</a></li>
 <li><a href="#44-design-of-the-microarchitecture-level">4.4 Design of the microarchitecture level</a>
 <ul>
 <li><a href="#441-speed-versus-cost">4.4.1 Speed versus cost</a></li>
-<li><a href="#442-reducing-the-execution-path-length">4.4.2 Reducing the execution path length</a></li>
-<li><a href="#443-a-design-with-prefetching-the-mic-2">4.4.3 A design with prefetching: the mic-2</a></li>
-<li><a href="#444-a-pipelined-design-the-mic-3">4.4.4 A pipelined design: the mic-3</a></li>
-<li><a href="#445-a-seven-stage-pipeline-the-mic-4">4.4.5 A seven-stage pipeline: the mic-4</a></li>
 </ul>
 </li>
 <li><a href="#45-improving-performance">4.5 Improving performance</a>
 <ul>
-<li><a href="#451-cache-memory">4.5.1 Cache memory</a></li>
+<li><a href="#451-cache-memory">4.5.1 Cache memory</a>
+<ul>
+<li><a href="#direct-mapped-caches">Direct-mapped caches</a></li>
+<li><a href="#set-associative-caches">Set-associative caches</a></li>
+</ul>
+</li>
 <li><a href="#452-branch-prediction">4.5.2 Branch prediction</a></li>
 </ul>
 </li>
@@ -441,16 +427,27 @@ stikkord</em>.</p>
 <li><a href="#531-expanding-opcodes">5.3.1 Expanding opcodes</a></li>
 </ul>
 </li>
-<li><a href="#54-addressing">5.4 Addressing</a></li>
-<li><a href="#55-instruction-types">5.5 Instruction types</a></li>
-<li><a href="#56-flow-of-control">5.6 Flow of control</a>
+<li><a href="#54-addressing">5.4 Addressing</a>
 <ul>
-<li><a href="#561-sequential-flow-of-control-and-branches">5.6.1 Sequential flow of control and branches</a></li>
-<li><a href="#562-procedures">5.6.2 Procedures</a></li>
+<li><a href="#542-immidiate-addressing">5.4.2 Immidiate addressing</a></li>
+<li><a href="#543-direct-addressing">5.4.3 Direct addressing</a></li>
+<li><a href="#544-register-addressing">5.4.4 Register addressing</a></li>
+<li><a href="#545-register-indirect-addressing">5.4.5 Register indirect addressing</a></li>
+<li><a href="#546-indexed-addressing">5.4.6 Indexed addressing</a></li>
+<li><a href="#547-based-indexed-addressing">5.4.7 Based-Indexed Addressing</a></li>
 </ul>
 </li>
-<li><a href="#71-introduction-to-the-assembly-language">7.1 Introduction to the Assembly language</a></li>
-<li><a href="#73-the-assembly-process">7.3 The Assembly process</a></li>
+<li><a href="#55-instruction-types">5.5 Instruction types</a>
+<ul>
+<li><a href="#551-data-movement-instructions">5.5.1 Data movement instructions</a></li>
+<li><a href="#552-dyadic-operations">5.5.2 Dyadic operations</a></li>
+<li><a href="#553-monadic-operations">5.5.3 Monadic operations</a></li>
+<li><a href="#554-comparisons-and-conditional-branches">5.5.4 Comparisons and conditional branches</a></li>
+<li><a href="#555-procedure-call-instructions">5.5.5 Procedure call instructions</a></li>
+<li><a href="#556-loop-control">5.5.6 Loop control</a></li>
+<li><a href="#557-inputoutput">5.5.7 Input/output</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#virtual-memory">Virtual memory</a>
@@ -717,79 +714,162 @@ Credit: <a href="https://diveintosystems.org/book/C11-MemHierarchy/mem_hierarchy
 <h2 class="mume-header" id="42-an-example-isa-ijvm">4.2 An example ISA: IJVM</h2>
 
 <p><em>Low priority</em></p>
-<h3 class="mume-header" id="421-stacks">4.2.1 Stacks</h3>
-
-<p><em>Low priority</em></p>
-<h3 class="mume-header" id="422-the-ijvm-memory-model">4.2.2 The IJVM memory model</h3>
-
-<p><em>Low priority</em></p>
-<h3 class="mume-header" id="423-the-ijvm-instruciton-set">4.2.3 The IJVM instruciton set</h3>
-
-<p><em>Low priority</em></p>
+<ul>
+<li>4.2.1 Stacks</li>
+<li>4.2.2 The IJVM memory model</li>
+<li>4.2.3 The IJVM instruciton set</li>
+</ul>
 <h2 class="mume-header" id="43-an-example-implementation">4.3 An example implementation</h2>
 
-<h3 class="mume-header" id="431-microinstructions-and-notation">4.3.1 Microinstructions and notation</h3>
-
-<h3 class="mume-header" id="432-implementation-of-ijvm-using-the-mic-1">4.3.2 Implementation of IJVM using the mic-1</h3>
-
+<p><em>Low priority</em></p>
+<ul>
+<li>4.3.1 Microinstructions and notation</li>
+<li>4.3.2 Implementation of IJVM using the mic-1</li>
+</ul>
 <h2 class="mume-header" id="44-design-of-the-microarchitecture-level">4.4 Design of the microarchitecture level</h2>
 
 <h3 class="mume-header" id="441-speed-versus-cost">4.4.1 Speed versus cost</h3>
 
-<h3 class="mume-header" id="442-reducing-the-execution-path-length">4.4.2 Reducing the execution path length</h3>
-
-<h3 class="mume-header" id="443-a-design-with-prefetching-the-mic-2">4.4.3 A design with prefetching: the mic-2</h3>
-
-<h3 class="mume-header" id="444-a-pipelined-design-the-mic-3">4.4.4 A pipelined design: the mic-3</h3>
-
-<h3 class="mume-header" id="445-a-seven-stage-pipeline-the-mic-4">4.4.5 A seven-stage pipeline: the mic-4</h3>
-
+<p>Speed can be measured in a variety of ways, but given a circuit technology and an ISA, there are three basic approaches for increasing the speed of execution:</p>
+<ol>
+<li>Reduce the number of clock cycles needed to execute an instruction.</li>
+<li>Simplify the organization so that the clock cycle can be shorter.</li>
+<li>Overlap the execution of instructions</li>
+</ol>
+<p><em>The following (4.4.2 - 4.4.5) might be useful, but have not been prioritized. Read the book for details.</em></p>
+<ul>
+<li>4.4.2 Reducing the execution path length</li>
+<li>4.4.3 A design with prefetching: the mic-2</li>
+<li>4.4.4 A pipelined design: the mic-3</li>
+<li>4.4.5 A seven-stage pipeline: the mic-4</li>
+</ul>
 <h2 class="mume-header" id="45-improving-performance">4.5 Improving performance</h2>
 
 <h3 class="mume-header" id="451-cache-memory">4.5.1 Cache memory</h3>
 
+<p>See <a href="#225-cache-memory">2.2.5 Cache memory</a> for an introduction to caches.</p>
+<p>All caches use the following model. Main memory is divided up into fixed size blocks called cache lines. A cache line typically consists of 4 to 64 consecutive bytes. Lines are numbered consecutively starting at 0, so with a 32-byte line size, line 0 is bytes 0 to 31, line 1 is bytes 32 to 63, and so on. At any instant, some lines are in the cache. When memory is referenced, the cache controller circuit checks to see if the word referenced is currently in the cache. If so, the value there can be used, saving a trip to main memory. If the word is not there, some line entry is removed from the cache and the line needed is fetched from memory or more distant cache to replace it.</p>
+<h4 class="mume-header" id="direct-mapped-caches">Direct-mapped caches</h4>
+
+<p>The simplest cache is known as a direct-mapped cache. Each cache entry consists of three parts:</p>
+<ol>
+<li>The <code>Valid</code> bit indicates whether there is any valid data in this entry or not. When the system is booted (started), all entries are marked as invalid.</li>
+<li>The <code>Tag</code> field consists of a unique, 16-bit value identifying the corresponding line of memory from which the data came.</li>
+<li>The <code>Data</code> field contains a copy of the data in memory. This field holds one cache line of 32 bytes.</li>
+</ol>
+<p>In a direct-mapped cache, a given memory word can be stored in exactly one place within the cache. Given a memory address, there is only one place to look for it in the cache. If it is not there, then it is not in the cache.</p>
+<h4 class="mume-header" id="set-associative-caches">Set-associative caches</h4>
+
+<p>As mentioned above, many different lines in memory compete for the same cache slots. If a program heavily uses words at addresses 0 and at 65,536, there will be constant conflicts, with each reference potentially evicting the other one from the cache. A solution is to allow two or more lines in each cache entry. A cache with n possible entries for each address is called an n-way set-associative cache.</p>
+<p>When a new entry is to be brought into the cache, which of the present items should be discarded? The optimal decision, of course, requires a peek into the future, but a pretty good algorithm for most purposes is LRU (Least Recently Used). This algorithm keeps an ordering of each set of locations that could be accessed from a given memory location. Whenever any of the present lines are accessed, it updates the list, marking that entry the most recently accessed. When it comes time to replace an entry, the one at the end of the list&#x2014;the least recently accessed&#x2014;is the one discarded.</p>
 <h3 class="mume-header" id="452-branch-prediction">4.5.2 Branch prediction</h3>
 
+<p>With good branch prediction, we often don&apos;t need to wait for the condition instruction to complete the pipeline before stepping to the next instruction. If the prediction is wrong however, we must backtrack to the branch and take the other route. This may involve a flush of the pipeline.</p>
+<p>With <em>dynamic branch prediction</em>, branches are predicted at run-time. If a branch has been chosed previously, it will be chosen again. A history table of the branches must be stored.</p>
+<p>With <em>static branch prediction</em>, branches are predicted at compile-time.</p>
 <h2 class="mume-header" id="81-on-chip-parallelism">8.1 On-chip parallelism</h2>
 
 <h3 class="mume-header" id="811-instruction-level-parallelism-ila">8.1.1 Instruction-level parallelism (ILA)</h3>
 
+<p>Multiple-issue CPUs come in two varieties: superscalar processors and VLIW (Very Long Instruction Word) processors.</p>
+<p>In effect, VLIW shifts the burden of determining which instructions can be issued together from run time to compile time. Not only does this choice make the hardware simpler and faster, but since an optimizing compiler can run for a long time if need be, better bundles can be assembled than what the hardware could do at run time.</p>
 <h3 class="mume-header" id="812-on-chip-multithreading">8.1.2 On-chip multithreading</h3>
 
+<p>All modern, pipelined CPUs have an inherent problem: when a memory reference misses the level1and level2caches, there is a long wait until the requested word (and its associated cache line) are loaded into the cache, so the pipeline stalls. One approach to dealing with this situation, called on-chip multithreading, allows the CPU to manage multiple threads of control at the same time in an attempt to mask these stalls. In short, if thread 1 is blocked, the CPU still has a chance of running thread 2 in order to keep the hardware fully occupied.</p>
+<p>The three main ways of doing on-chip multithreading are:</p>
+<ul>
+<li>Fine-grained multithreading</li>
+<li>Coarse-grained multithreading</li>
+<li>Simultaneous multithreading</li>
+</ul>
 <h1 class="mume-header" id="instruction-set-architecture-level-isa">Instruction set architecture level (ISA)</h1>
 
 <h2 class="mume-header" id="51-overview-of-the-isa-level">5.1 Overview of the ISA level</h2>
 
 <h3 class="mume-header" id="511-properties-of-the-isa-level">5.1.1 Properties of the ISA level</h3>
 
+<p>In principle, the ISA level is defined by how the machine appears to a machine-language programmer. Since no (sane) person does much programming in machine language any more, let us redefine this to say that ISA-level code is what a compiler outputs. To produce ISA-level code, the compiler writer has to know what the memory model is, what registers there are, what data types and instructions are available, and so on. The collection of all this information is what defines the ISA level.</p>
 <h3 class="mume-header" id="512-memory-models">5.1.2 Memory models</h3>
 
+<p>All computers divide memory up into cells that have consecutive addresses. Bytes are generally grouped into 4-byte (32-bit) or 8-byte (64-bit) words with instructions available for manipulating entire words.</p>
+<p>Most machines have a single linear address space at the ISA level, extending from address 0 up to some maximum, often <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>3</mn></msup><mn>2</mn><mo>&#x2212;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^32 &#x2212; 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> bytes or <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>6</mn></msup><mn>4</mn><mo>&#x2212;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^64 &#x2212; 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> bytes. However, a few machines have separate address spaces for instructions and data (<em>Hardvard-architecture</em>), so that an instruction fetch at address 8 goes to a different address space than a data fetch at address 8. This scheme is more complex than having a single address space, but it has two advantages. First, it becomes possible to have <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>3</mn></msup><mn>2</mn></mrow><annotation encoding="application/x-tex">2^32</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mord">2</span></span></span></span> bytes of program and an additional <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>3</mn></msup><mn>2</mn></mrow><annotation encoding="application/x-tex">2^32</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mord">2</span></span></span></span> bytes of data while using only 32-bit addresses. Second, because all writes automatically go to data space, it becomes impossible for a program to accidentally overwrite itself, thus eliminating one source of program bugs.</p>
 <h3 class="mume-header" id="513-registers">5.1.3 Registers</h3>
 
+<p>All computers have some registers visible at the ISA level. They are there to control execution of the program, hold temporary results, and serve other purposes.</p>
+<p>ISA-level registers can be roughly divided into two categories: special-purpose registers and general-purpose registers The special-purpose registers include things like the program counter and stack pointer, as well as other registers with a specific function. In contrast, the general-purpose registers are there to hold key local variables and intermediate results of calculations. Their main function is to provide rapid access to heavily used data (basically, avoiding memory accesses). RISC machines, with their fast CPUs and (relatively) slow memories, usually have at least 32 general-purpose registers, and the trend in new CPU designs is to have even more.</p>
+<p>One control register that is something of a kernel/user hybrid is the flags register or PSW (Program Status Word). This register holds various miscellaneous bits that are needed by the CPU. The most important bits are the condition codes. These bits are set on every ALU cycle and reflect the status of the result of the<br>
+most recent operation. Typical condition code bits include</p>
+<ul>
+<li>N &#x2014; Set when the result was Negative.</li>
+<li>Z &#x2014; Set when the result was Zero.</li>
+<li>V &#x2014; Set when the result caused an oVerflow.</li>
+<li>C &#x2014; Set when the result caused a Carry out of the leftmost bit.</li>
+<li>A &#x2014; Set when there was a carry out of bit 3 (Auxiliary carry&#x2014;see below).</li>
+<li>P &#x2014; Set when the result had even Parity.</li>
+</ul>
+<p>The condition codes are important because the comparison and conditional branch instructions use them. For example, the CMP instruction typically subtracts two operands and sets the condition codes based on the difference. If the operands are equal, then the difference will be zero and the Z condition code bit in the PSW register will be set. A subsequent BEQ instruction tests the Z bit and branches if it is set.</p>
 <h2 class="mume-header" id="53-instruction-formats">5.3 Instruction formats</h2>
 
+<p>An instruction consists of an opcode, usually along with some additional information such as where operands come from and where results go to.</p>
 <h3 class="mume-header" id="531-design-criteria-for-instruction-formats">5.3.1 Design criteria for instruction formats</h3>
 
+<ul>
+<li>Short instructions are better than long ones.</li>
+<li>Sufficient room in the instruction format to express all the operations desired.</li>
+<li>The number of bits in an address field.</li>
+</ul>
 <h3 class="mume-header" id="531-expanding-opcodes">5.3.1 Expanding opcodes</h3>
 
+<p>The idea of expanding opcodes demonstrates a trade-off between the space for opcodes and space for other information.</p>
 <h2 class="mume-header" id="54-addressing">5.4 Addressing</h2>
 
-<p><code>TODO: Addressing modes 5.4.2-5.4.7</code></p>
+<p>Most instructions have operands, so some way is needed to specify where they are. This subject, which we will now discuss, is called addressing.</p>
+<h3 class="mume-header" id="542-immidiate-addressing">5.4.2 Immidiate addressing</h3>
+
+<p>The simplest way for an instruction to specify an operand is for the address part of the instruction actually to contain the operand itself rather than an address or other information describing where the operand is. Such an operand is called an immediate operand because it is automatically fetched from memory at the same time the instruction itself is fetched; hence it is immediately available for use.</p>
+<h3 class="mume-header" id="543-direct-addressing">5.4.3 Direct addressing</h3>
+
+<p>A method for specifying an operand in memory is just to give its full address. This mode is called direct addressing. Like immediate addressing, direct addressing is restricted in its use: the instruction will always access exactly the same memory location. So while the value can change, the location cannot.</p>
+<h3 class="mume-header" id="544-register-addressing">5.4.4 Register addressing</h3>
+
+<p>Register addressing is conceptually the same as direct addressing but specifies a register instead of a memory location. Because registers are so important (due to fast access and short addresses) this addressing mode is the most common one on most computers. This addressing mode is known simply as register mode. In load/store architectures, nearly all instructions use this addressing mode exclusively.</p>
+<h3 class="mume-header" id="545-register-indirect-addressing">5.4.5 Register indirect addressing</h3>
+
+<p>In this mode, the operand being specified comes from memory or goes to memory, but its address is not hardwired into the instruction, as in direct addressing. Instead, the address is contained in a register. An address used in this manner is called a <em>pointer</em>. A big advantage of register indirect addressing is that it can reference memory without paying the price of having a full memory address in the instruction.</p>
+<h3 class="mume-header" id="546-indexed-addressing">5.4.6 Indexed addressing</h3>
+
+<p>Addressing memory by giving a register (explicit or implicit) plus a constant offset is called indexed addressing.</p>
+<h3 class="mume-header" id="547-based-indexed-addressing">5.4.7 Based-Indexed Addressing</h3>
+
+<p>Some machines have an addressing mode in which the memory address is computed by adding up two registers plus an (optional) offset. Sometimes this mode is called based-indexed addressing.</p>
 <h2 class="mume-header" id="55-instruction-types">5.5 Instruction types</h2>
 
-<p><code>TODO: Instruction types 5.5.1-5.5.7</code></p>
-<h2 class="mume-header" id="56-flow-of-control">5.6 Flow of control</h2>
+<h3 class="mume-header" id="551-data-movement-instructions">5.5.1 Data movement instructions</h3>
 
-<h3 class="mume-header" id="561-sequential-flow-of-control-and-branches">5.6.1 Sequential flow of control and branches</h3>
+<p>Copying data from one place to another is the most fundamental of all operations. Since there are two possible sources for a data item (memory or register), and there are two possible destinations for a data item (memory or register), four different kinds of copying are possible. Some computers have four instructions for the four cases. Others have one instruction for all four cases. Still others use LOAD to go from memory to a register, STORE to go from a register to memory, MOVE to go from one register to another register, and no instruction for a memory-to-memory copy.</p>
+<h3 class="mume-header" id="552-dyadic-operations">5.5.2 Dyadic operations</h3>
 
-<h3 class="mume-header" id="562-procedures">5.6.2 Procedures</h3>
+<p>Dyadic operations combine two operands to produce a result. All ISAs have instructions to perform addition and subtraction on integers. Another group of dyadic operations includes the Boolean instructions.</p>
+<h3 class="mume-header" id="553-monadic-operations">5.5.3 Monadic operations</h3>
 
-<h2 class="mume-header" id="71-introduction-to-the-assembly-language">7.1 Introduction to the Assembly language</h2>
+<p>Monadic operations have one operand and produce one result. Instructions to shift or rotate the contents of a word or byte are quite useful and are often provided in several variations. Shifts are operations in which the bits are moved to the left or right, with bits shifted off the end of the word being lost.</p>
+<h3 class="mume-header" id="554-comparisons-and-conditional-branches">5.5.4 Comparisons and conditional branches</h3>
 
-<p><em>Regarded as trivial.</em></p>
-<h2 class="mume-header" id="73-the-assembly-process">7.3 The Assembly process</h2>
+<p>See last part of <a href="#513-registers">5.1.3 Registers</a></p>
+<h3 class="mume-header" id="555-procedure-call-instructions">5.5.5 Procedure call instructions</h3>
 
-<p><em>Regarded as trivial.</em></p>
+<p>A procedure is a group of instructions that performs some task and that can be invoked (called) from several places in the program. The term subroutine is often used instead of procedure, especially when referring to assembly-language programs. In C, procedures are called functions. When the procedure has finished its task, it must return to the statement after the call. Therefore, the return address must be transmitted to the procedure or saved somewhere so that it can be located when it is time to return.</p>
+<h3 class="mume-header" id="556-loop-control">5.5.6 Loop control</h3>
+
+<p>The need to execute a group of instructions a fixed number of times occurs frequently and thus some machines have instructions to facilitate doing this. All the schemes involve a counter that is increased or decreased by some constant once each time through the loop. The counter is also tested once each time through the loop. If a certain condition holds, the loop is terminated.</p>
+<h3 class="mume-header" id="557-inputoutput">5.5.7 Input/output</h3>
+
+<p>No other group of instructions exhibits as much variety from machine to machine as the I/O instructions. Three different I/O schemes are in current use in personal computers. These are</p>
+<ol>
+<li>Programmed I/O with busy waiting.</li>
+<li>Interrupt-driven I/O.</li>
+<li>DMA I/O.</li>
+</ol>
 <h1 class="mume-header" id="virtual-memory">Virtual memory</h1>
 
 <h2 class="mume-header" id="61-virtual-memory">6.1 Virtual memory</h2>
