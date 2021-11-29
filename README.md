@@ -467,14 +467,29 @@ No other group of instructions exhibits as much variety from machine to machine 
 # Virtual memory
 
 ## 6.1 Virtual memory
+Virtual memory is a storage allocation scheme in which secondary memory can be addressed as though it were part of the main memory.
 
 ### 6.1.1 Paging
+The technique for automatic overlaying is called paging and the chunks of program read in from disk are called pages. A memory map or page table specifies for each virtual address what the corresponding physical address is.
+
+Programs are written just as though there were enough main memory for the whole virtual address space, even though that is not the case. Programs may load from, or store into, any word in the virtual address space, or branch to any instruction located anywhere within the virtual address space, without regard to the fact that there really is not enough physical memory. In fact, the programmer can write programs without even being aware that virtual memory exists. The computer just looks as if it has a big memory.
 
 ### 6.1.2 Implementation of paging
+Every computer with virtual memory has a device for doing the virtual-to-physical mapping. This device is called the MMU (Memory Management Unit).
 
 ### 6.1.3 Demand paging and the working-set model
+When a reference is made to an address on a page not present in main memory, it is called a *page fault*. After a page fault has occurred, the operating system must read in the required page from the disk, enter its new physical memory location in the page table, and then repeat the instruction that caused the fault. (Similar to a cache miss).
+
+In demand paging, a page is brought into memory only when a request for it occurs, not in advance.
 
 ### 6.1.4 Page-replacement policy
+Ideally, the set of pages that a program is actively and heavily using, called the working set, can be kept in memory to reduce page faults. However, programmers rarely know which pages are in the working set, so the operating system must discover this set dynamically. When a program references a page that is not in main memory, the needed page must be fetched from the disk. To make room for it, however, some other page will generally have to be sent back to the disk. Thus an algorithm that decides which page to remove is needed. As with [set associative caches](#set-associative-caches), we may use the Least Recently Used-algorithm. Another page-replacement algorithm is FIFO (First-In First-Out).
 
 ### 6.1.5 Page size and fragmentation
- 
+The "last page" of a program is often not completely filled, and will waste space when it is in memory. This is called *internal fragmentation*. The are multiple positives and negatives to both large and small sizes.
+Small pages|Large pages
+---|---
+Less waste 👍| More waste 👎
+Large page table 👎| Small page table 👍
+Inefficient use of disk bandwidth 👎| Efficient use of disk bandwidth 👍
+All things considered, the trend is toward larger page sizes. In practice, 4 KB is the minimum these days.
