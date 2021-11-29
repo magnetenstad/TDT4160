@@ -165,6 +165,10 @@ Computer architects are constantly striving to improve performance of the machin
 #### Pipelining
 It has been known for years that the actual fetching of instructions from memory is a major bottleneck in instruction execution speed. In a pipeline, instruction execution is often divided into many (often a dozen or more) parts, each one handled by a dedicated piece of hardware, all of which can run in parallel. Pipelining allows a trade-off between *latency* (how long it takes to execute an instruction), and *processor bandwidth* (how many instructions that can be executed per second). The maximum clock frequency of the CPU is decided by the slowest stage of the pipeline.
 
+![Instruction pipelining of five instructions](https://binaryterms.com/wp-content/uploads/2021/03/Instruction-Pipelining.jpg)
+This pipeline has five stages: instruction fetch, instruction decode, operand fetch, instruction execute, operand store.
+Credit: https://binaryterms.com/instruction-pipelining.html
+
 #### Superscalar architectures
 The definition of "superscalar" has evolved somewhat over time. It is now used to describe processors that issue multiple instructions—often four or six—in a single clock cycle. Of course, a superscalar CPU must have multiple functional units to hand all these instructions to. 
 
@@ -179,7 +183,10 @@ A substantial number of problems in computational domains such as the physical s
 - A *vector processor* appears to the programmer very much like a SIMD processor. Like a SIMD processor, it is very efficient at executing a sequence of operations on pairs of data elements. But unlike a SIMD processor, all of the operations are performed in a single, heavily pipelined functional unit.
 
 #### Multiprocessors
-The processing elements in a data parallel processor are not independent CPUs, since there is only one control unit shared among all of them. Our first parallel system with multiple full-blown CPUs is the multiprocessor, a system with more than one CPU sharing a common memory, like a group of people in a room sharing a common blackboard. Since each CPU can read or write any part of memory, they must coordinate (in software) to avoid getting in each other’s way.
+Our first parallel system with multiple full-blown CPUs is the multiprocessor, a system with more than one CPU sharing a common memory, like a group of people in a room sharing a common blackboard. Since each CPU can read or write any part of memory, they must coordinate (in software) to avoid getting in each other’s way.
+
+![A multiprocessor](https://zitoc.com/wp-content/uploads/2019/04/Multiprocessor-system.png)
+Credit: https://zitoc.com/multiprocessor-system/
 
 #### Multicomputers
 Although multiprocessors with a modest number of processors (≤ 256) are relatively easy to build, large ones are surprisingly difficult to construct. The difficulty is in connecting so many the processors to the memory. To get around these problems, many designers have simply abandoned the idea of having a shared memory and just build systems consisting of large numbers of interconnected computers, each having its own private memory, but no common memory. These systems are called multicomputers. The CPUs in a multicomputer are said to be *loosely coupled*, to contrast them with the *tightly coupled* multiprocessor CPUs.
@@ -193,6 +200,10 @@ Historically, CPUs have always been faster than memories. What this imbalance me
 Actually, the problem is not technology, but economics. Engineers know how to build memories that are as fast as CPUs, but to run them at full speed, they have to be located on the CPU chip (because going over the bus to memory is very slow). What we would prefer is a large amount of fast memory at a low price. Interestingly enough, techniques are known for combining a small amount of fast memory with a large amount of slow memory to get the speed of the fast memory (almost) and the capacity of the large memory at a moderate price. The small, fast memory is called a cache.
 
 The basic idea behind a cache is simple: the most heavily used memory words are kept in the cache. When the CPU needs a word, it first looks in the cache. Only if the word is not there does it go to main memory. Ifasubstantial fraction of the words are in the cache, the average access time can be greatly reduced.
+
+![Cache and virtual memory, visualized](https://www.gatevidyalay.com/wp-content/uploads/2018/06/Cache-Mapping-Diagram-2.png)
+Illustration of cache memory, and [virtual memory](#virtual-memory).
+Credit: https://www.gatevidyalay.com/cache-mapping-cache-mapping-techniques/
 
 #### Locality principle
 The locality principle is the observation that the memory references made in any short time interval tend to use only a small fraction of the total memory.
@@ -258,6 +269,9 @@ A full adder takes three 1-bit inputs $A$, $B$ and $C_{in}$, (carry in) and outp
 ##### Ripple carry adder
 To build an adder for, say, two 16-bit words, one just replicates the full adder 16 times. The carry out of a bit is used as the carry into its left neighbor. The carry into the rightmost bit is wired to 0. This type of adder is called a *ripple carry adder*, because in the worst case, adding 1 to 111...111 (binary), the addition cannot complete until the carry has rippled all the way from the rightmost bit to the leftmost bit. Adders that do not have this delay, and hence are faster, also exist and are usually preferred.
 
+![Ripple carry adder](https://3.bp.blogspot.com/-PoH_SNNRjqE/XEjFLvzn5lI/AAAAAAAAApQ/JdM5A8i-zzYmPI2IY4vfZVHAUiLsvjD3gCLcBGAs/s1600/needed.png)
+Credit: https://www.maxybyte.com/p/contents-1-introduction-1.html
+
 ## 3.3 Memory
 
 ### 3.3.2 Flip-flops
@@ -317,6 +331,12 @@ When the CPU commands an I/O device to do something, it usually expects an inter
 - 4.2.1 Stacks
 - 4.2.2 The IJVM memory model
 - 4.2.3 The IJVM instruciton set
+
+![IJVM architecture](https://users.cs.fiu.edu/~prabakar/cda4101/Common/notes/figs/mic1-architecture.gif)
+The IJVM microarchitecture.
+![IJVM microinstruction format](https://users.cs.fiu.edu/~prabakar/cda4101/Common/notes/figs/instr-format.gif)
+The IJVM microinstruction format.
+Credit: https://users.cs.fiu.edu/~prabakar/cda4101/Common/notes/lecture17.html
 
 ## 4.3 An example implementation
 *Low priority*
@@ -388,7 +408,7 @@ In principle, the ISA level is defined by how the machine appears to a machine-l
 ### 5.1.2 Memory models
 All computers divide memory up into cells that have consecutive addresses. Bytes are generally grouped into 4-byte (32-bit) or 8-byte (64-bit) words with instructions available for manipulating entire words. 
 
-Most machines have a single linear address space at the ISA level, extending from address 0 up to some maximum, often $2^32 − 1$ bytes or $2^64 − 1$ bytes. However, a few machines have separate address spaces for instructions and data (*Hardvard-architecture*), so that an instruction fetch at address 8 goes to a different address space than a data fetch at address 8. This scheme is more complex than having a single address space, but it has two advantages. First, it becomes possible to have $2^32$ bytes of program and an additional $2^32$ bytes of data while using only 32-bit addresses. Second, because all writes automatically go to data space, it becomes impossible for a program to accidentally overwrite itself, thus eliminating one source of program bugs.
+Most machines have a single linear address space at the ISA level, extending from address 0 up to some maximum, often $2^{32} − 1$ bytes or $2^{64} − 1$ bytes. However, a few machines have separate address spaces for instructions and data (*Hardvard-architecture*), so that an instruction fetch at address 8 goes to a different address space than a data fetch at address 8. This scheme is more complex than having a single address space, but it has two advantages. First, it becomes possible to have $2^{32}$ bytes of program and an additional $2^{32}$ bytes of data while using only 32-bit addresses. Second, because all writes automatically go to data space, it becomes impossible for a program to accidentally overwrite itself, thus eliminating one source of program bugs.
 
 ### 5.1.3 Registers
 All computers have some registers visible at the ISA level. They are there to control execution of the program, hold temporary results, and serve other purposes.
@@ -423,20 +443,32 @@ Most instructions have operands, so some way is needed to specify where they are
 ### 5.4.2 Immidiate addressing
 The simplest way for an instruction to specify an operand is for the address part of the instruction actually to contain the operand itself rather than an address or other information describing where the operand is. Such an operand is called an immediate operand because it is automatically fetched from memory at the same time the instruction itself is fetched; hence it is immediately available for use.
 
+Example: `MOV R0, #1`
+
 ### 5.4.3 Direct addressing
 A method for specifying an operand in memory is just to give its full address. This mode is called direct addressing. Like immediate addressing, direct addressing is restricted in its use: the instruction will always access exactly the same memory location. So while the value can change, the location cannot. 
+
+Example: `LOAD R0, #0xFFFF 1000`
 
 ### 5.4.4 Register addressing
 Register addressing is conceptually the same as direct addressing but specifies a register instead of a memory location. Because registers are so important (due to fast access and short addresses) this addressing mode is the most common one on most computers. This addressing mode is known simply as register mode. In load/store architectures, nearly all instructions use this addressing mode exclusively.
 
+Example: `MOV R0, R1`
+
 ### 5.4.5 Register indirect addressing
 In this mode, the operand being specified comes from memory or goes to memory, but its address is not hardwired into the instruction, as in direct addressing. Instead, the address is contained in a register. An address used in this manner is called a *pointer*. A big advantage of register indirect addressing is that it can reference memory without paying the price of having a full memory address in the instruction.
+
+Example: `LOAD R0, (R1)`
 
 ### 5.4.6 Indexed addressing
 Addressing memory by giving a register (explicit or implicit) plus a constant offset is called indexed addressing.
 
+Example: `LOAD R0, #100(R1)`
+
 ### 5.4.7 Based-Indexed Addressing
 Some machines have an addressing mode in which the memory address is computed by adding up two registers plus an (optional) offset. Sometimes this mode is called based-indexed addressing.
+
+Example: `LOAD R0, (R1 + R2)`
 
 ## 5.5 Instruction types
 
@@ -468,6 +500,8 @@ No other group of instructions exhibits as much variety from machine to machine 
 
 ## 6.1 Virtual memory
 Virtual memory is a storage allocation scheme in which secondary memory can be addressed as though it were part of the main memory.
+
+See [memory caching](#225-cache-memory) for an illustraion.
 
 ### 6.1.1 Paging
 The technique for automatic overlaying is called paging and the chunks of program read in from disk are called pages. A memory map or page table specifies for each virtual address what the corresponding physical address is.
