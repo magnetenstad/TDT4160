@@ -6,7 +6,7 @@ stikkord*.
 
 Note: this will only include information which is regarded as "non-trivial".
 
-This document is hosted at [magne.dev](https://magne.dev/TDT4160)
+This document is hosted at [magne.dev](https://magne.dev/TDT4160-notes)
 
 # Table of contents
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
